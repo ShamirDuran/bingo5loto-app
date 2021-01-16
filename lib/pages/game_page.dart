@@ -1,11 +1,33 @@
-import 'package:bingo_app/util/bingo.dart';
+import 'package:bingo_app/utils/bingo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class GamePage extends StatelessWidget {
+class GamePage extends StatefulWidget {
+  @override
+  _GamePageState createState() => _GamePageState();
+}
+
+class _GamePageState extends State<GamePage> {
+  Bingo bingo;
+  List<List<int>> carton;
+  List<int> balotas;
+
+  @override
+  void initState() {
+    super.initState();
+    bingo = Bingo();
+    carton = bingo.getCarton();
+    balotas = List();
+    // Relleno
+    balotas.add(1);
+    balotas.add(15);
+    balotas.add(70);
+    balotas.add(8);
+    balotas.add(9);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final carton = Bingo().getCarton();
-
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -19,18 +41,25 @@ class GamePage extends StatelessWidget {
         ),
         title: Text("Bingo"),
       ),
-      body: Column(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Bolas que salen"),
-              SizedBox(width: 30.0),
-              Text("Tablero numeros"),
-            ],
+          Container(
+            width: 310.0,
+            child: Column(
+              children: [
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _balotas(),
+                    _tableroNumeros(),
+                  ],
+                ),
+                _tablero(carton),
+              ],
+            ),
           ),
-          _tablero(carton),
         ],
       ),
     );
@@ -84,6 +113,59 @@ class GamePage extends StatelessWidget {
           ]),
         ],
       ),
+    );
+  }
+
+  Widget _tableroNumeros() {
+    return Container(
+      padding: EdgeInsets.all(6.0),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(3.0),
+      ),
+      child: Table(
+        defaultColumnWidth: FixedColumnWidth(20.0),
+        children: [for (var i = 0; i < 15; i++) _fila(i)],
+      ),
+    );
+  }
+
+  TableRow _fila(int index) {
+    final fila = bingo.generarFila(index + 1);
+    return TableRow(
+      children: [for (var i = 0; i < 5; i++) _itemFila(fila[i])],
+    );
+  }
+
+  Widget _itemFila(int value) {
+    return Container(
+      height: 20.0,
+      child: Text(
+        value.toString(),
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: balotas.contains(value) ? Colors.white : Colors.grey[600],
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _balotas() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          child: SvgPicture.asset(
+            "assets/images/canasta.svg",
+            width: 150.0,
+          ),
+        ),
+        SizedBox(height: 20.0),
+        CircleAvatar(
+          child: Text("75"),
+        ),
+      ],
     );
   }
 

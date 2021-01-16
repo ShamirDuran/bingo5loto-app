@@ -7,9 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.indigoAccent,
-      ),
+      theme: ThemeData(),
       title: 'Bingo App',
       debugShowCheckedModeBanner: false,
       initialRoute: "game",
