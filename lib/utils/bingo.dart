@@ -29,7 +29,7 @@ class Bingo {
     return fila;
   }
 
-  /// Genera el tablero 5x5
+  /// Genera el tablero 5x5 de numeros aleatorios
   List<List<int>> getCarton() {
     print("   B  I  N  G  O");
     fila1 = _generarLinea(1);
@@ -47,7 +47,7 @@ class Bingo {
     return carton;
   }
 
-  /// Genera las filas del tablero de numeros
+  /// Genera las filas del tablero de los numeros del 1 al 75
   List<int> generarFila(int x) {
     List<int> fila = List();
     fila.add(x);
@@ -56,5 +56,25 @@ class Bingo {
     fila.add(x + 45);
     fila.add(x + 60);
     return fila;
+  }
+
+  List<List<bool>> generarControl() {
+    List<List<bool>> control = List();
+    control.add(_falseList());
+    control.add(_falseList());
+    control.add(_falseList());
+    control.add(_falseList());
+    control.add(_falseList());
+    return control;
+  }
+
+  _falseList() {
+    List<bool> list = List.filled(5, false);
+    return list;
+  }
+
+  int generarBalota() {
+    Random r = new Random();
+    return r.nextInt(75);
   }
 }
