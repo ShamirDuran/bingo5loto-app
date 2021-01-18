@@ -31,7 +31,6 @@ class Bingo {
 
   /// Genera el tablero 5x5 de numeros aleatorios
   List<List<int>> generarCarton() {
-    print("   B  I  N  G  O");
     fila1 = _generarLinea(1);
     carton.add(fila1);
     fila2 = _generarLinea(16);

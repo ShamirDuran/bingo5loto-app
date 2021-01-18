@@ -60,17 +60,21 @@ class _GamePageState extends State<GamePage> {
 
   Widget _cartones() {
     int divisor = 2;
-    int numFilas = (this.numCartones / divisor).round();
+    num helper = this.numCartones / divisor;
+    int numFilas = helper.round();
     int numCol = 2;
 
     return Table(
       children: [
         for (var i = 0; i < numFilas; i++)
-          TableRow(
-            children: [
-              for (var j = 0; j < numCol; j++) Carton(balotas: this.balotas)
-            ],
-          ),
+          if (i == numFilas - 1 && (helper % 1).round() == 1)
+            TableRow(children: [Carton(balotas: this.balotas), Text("")])
+          else
+            TableRow(
+              children: [
+                for (var j = 0; j < numCol; j++) Carton(balotas: this.balotas)
+              ],
+            ),
       ],
     );
   }

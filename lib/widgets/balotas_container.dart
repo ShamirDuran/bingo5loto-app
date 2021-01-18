@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /*
-   * Contenedor de la imagen de la canasta que genera las balotas
-   * y de la balota generada. 
-   */
+* Contenedor de la imagen de la canasta que genera las balotas
+* y de la balota generada. 
+*/
 class BalotasContainer extends StatelessWidget {
   final List<int> balotas;
   final Function action;
@@ -23,7 +23,6 @@ class BalotasContainer extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Imagen de la canasta
         _imagenCanasta(),
         SizedBox(height: 20.0),
         if (balotas.length > 0)
