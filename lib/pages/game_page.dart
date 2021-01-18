@@ -12,7 +12,7 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   List<int> balotas = List();
   Bingo bingo = Bingo();
-  final numCartones = 6;
+  int numCartones;
 
   @override
   void initState() {
@@ -29,6 +29,7 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
+    numCartones = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text("Bingo 5 App"),
@@ -43,7 +44,7 @@ class _GamePageState extends State<GamePage> {
       children: [
         // Parte superior
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+          margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 7.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
