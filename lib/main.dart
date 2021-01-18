@@ -1,4 +1,5 @@
 import 'package:bingo_app/pages/game_page.dart';
+import 'package:bingo_app/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -10,9 +11,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(),
       title: 'Bingo App',
       debugShowCheckedModeBanner: false,
-      initialRoute: "game",
+      initialRoute: "tablero",
       routes: {
-        "game": (_) => GamePage(),
+        "tablero": (_) => GamePage(),
+        "login": (_) => LoginPage(),
       },
     );
   }
