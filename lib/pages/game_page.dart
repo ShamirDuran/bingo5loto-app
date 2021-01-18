@@ -10,33 +10,19 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  Bingo bingo;
-  List<List<int>> carton;
-  List<int> balotas;
-
-  /*
-   * Representa cada elemento del carton. Si el elemento/numero esta dentro
-   * del arreglo de "balotas" se marca como true para indicar que este numero 
-   * salio.
-   * 
-   * Esta varaible tambien ayuda al cambio de color de los elementos del carton
-   */
-  List<List<bool>> control;
+  List<int> balotas = List();
+  Bingo bingo = Bingo();
+  final numCartones = 6;
 
   @override
   void initState() {
     super.initState();
-    bingo = Bingo();
-    carton = bingo.getCarton();
-    balotas = List();
-    control = bingo.generarControl();
   }
 
-  /// Es la funcion que valida los tap en los elementos del carton
-  _handleOnTapCarton(String num, int r, int c) {
-    if (balotas.contains(int.parse(num))) {
-      print("true");
-      control[r][c] = true;
+  _canastaOnClick() {
+    if (balotas.length < 18) {
+      int bal = bingo.generarBalota(this.balotas);
+      balotas.add(bal);
       setState(() {});
     }
   }
@@ -44,63 +30,47 @@ class _GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: _buildAppBar(),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 280.0,
-            child: Column(
-              children: [
-                SizedBox(height: 20.0),
-                _parteSuperior(),
-                Carton(
-                  carton: this.carton,
-                  control: this.control,
-                  action: _handleOnTapCarton,
-                )
-              ],
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: Text("Bingo 5 App"),
+        centerTitle: true,
       ),
+      body: _body(),
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      leading: IconButton(
-        icon: Icon(
-          Icons.menu,
-          color: Colors.white,
-        ),
-        // TODO: Hacer menu
-        onPressed: () => print("Menu"),
-      ),
-      title: Text("Bingo 5 App"),
-    );
-  }
-
-  // Es la parte superior, donde esta la canasta y la tabla de numeros del 1 al 75
-  Widget _parteSuperior() {
-    _valotasContainer() {
-      if (balotas.length < 18) {
-        balotas.add(bingo.generarBalota());
-        setState(() {});
-      }
-    }
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _body() {
+    return ListView(
       children: [
-        BalotasContainer(
-          balotas: this.balotas,
-          action: _valotasContainer,
+        // Parte superior
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BalotasContainer(balotas: this.balotas, action: _canastaOnClick),
+              TableroNumeros(balotas: this.balotas),
+            ],
+          ),
         ),
-        TableroNumeros(
-          balotas: this.balotas,
-        ),
+        _cartones(),
+        SizedBox(height: 20.0),
+      ],
+    );
+  }
+
+  Widget _cartones() {
+    int divisor = 2;
+    int numFilas = (this.numCartones / divisor).round();
+    int numCol = 2;
+
+    return Table(
+      children: [
+        for (var i = 0; i < numFilas; i++)
+          TableRow(
+            children: [
+              for (var j = 0; j < numCol; j++) Carton(balotas: this.balotas)
+            ],
+          ),
       ],
     );
   }

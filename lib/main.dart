@@ -8,12 +8,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(),
       title: 'Bingo App',
       debugShowCheckedModeBanner: false,
-      initialRoute: "tablero",
+      initialRoute: "game",
       routes: {
-        "tablero": (_) => GamePage(),
+        "game": (_) => GamePage(),
         "login": (_) => LoginPage(),
       },
     );
