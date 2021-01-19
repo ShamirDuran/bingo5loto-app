@@ -14,6 +14,7 @@ class TableroNumeros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 15.0),
       padding: EdgeInsets.all(6.0),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.8),

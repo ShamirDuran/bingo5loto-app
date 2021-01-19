@@ -12,6 +12,8 @@ class BalotasContainer extends StatelessWidget {
   final Function action;
   final bingo = Bingo();
   final radius = 25.0;
+  // TODO: pasar letra por parametros para el full carton
+  final String letra = "T";
 
   BalotasContainer({
     @required this.balotas,
@@ -20,20 +22,33 @@ class BalotasContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _imagenCanasta(),
-        SizedBox(height: 20.0),
-        if (balotas.length > 0)
-          _balota()
-        else
-          CircleAvatar(
-            radius: this.radius,
-            backgroundColor: Colors.transparent,
-            child: Text(""),
+    return Container(
+      margin: EdgeInsets.only(top: 15.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Toca la canasta para sacar una balota",
+            style: TextStyle(fontWeight: FontWeight.w300),
           ),
-      ],
+          SizedBox(height: 5.0),
+          InputChip(
+            onSelected: null,
+            disabledColor: Colors.grey[200],
+            label: Text('${balotas.length}/18'),
+          ),
+          _imagenCanasta(),
+          SizedBox(height: 7.0),
+          if (balotas.length > 0)
+            _balota()
+          else
+            CircleAvatar(
+              radius: this.radius,
+              backgroundColor: Colors.transparent,
+              child: Text(""),
+            ),
+        ],
+      ),
     );
   }
 

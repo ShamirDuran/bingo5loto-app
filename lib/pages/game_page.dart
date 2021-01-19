@@ -29,7 +29,9 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
-    numCartones = ModalRoute.of(context).settings.arguments;
+    // numCartones = ModalRoute.of(context).settings.arguments;
+    numCartones = 6;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Bingo 5 App"),

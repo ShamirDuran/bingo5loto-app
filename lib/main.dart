@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bingo App',
       debugShowCheckedModeBanner: false,
-      initialRoute: "login",
+      initialRoute: "game",
       routes: {
         "game": (_) => GamePage(),
         "login": (_) => LoginPage(),
