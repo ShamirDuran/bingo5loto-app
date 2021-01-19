@@ -36,6 +36,7 @@ class _GamePageState extends State<GamePage> {
       appBar: AppBar(
         title: Text("Bingo 5 App"),
         centerTitle: true,
+        elevation: 1,
       ),
       body: _body(),
     );

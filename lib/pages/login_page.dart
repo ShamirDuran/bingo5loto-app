@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Bingo 5 App",
+                        "Ingresa los datos que te suministrarón",
                         style: TextStyle(fontSize: 30.0),
                       ),
                       SizedBox(height: 40.0),
