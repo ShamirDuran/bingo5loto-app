@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       title: 'Bingo App',
       debugShowCheckedModeBanner: false,
-      initialRoute: "game",
+      initialRoute: "home",
       routes: {
         "home": (_) => HomePage(),
         "como-jugar": (_) => ComoJugarPage(),

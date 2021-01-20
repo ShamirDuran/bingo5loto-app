@@ -24,12 +24,11 @@ class _CartonState extends State<Carton> {
     super.initState();
     bingo = Bingo();
     carton = bingo.generarCarton();
+    id = uuid.v4().toString().substring(0, 13);
   }
 
   @override
   Widget build(BuildContext context) {
-    id = uuid.v4().toString().substring(0, 13);
-
     return Container(
       margin: EdgeInsets.only(top: 14.0, left: 5.0, right: 7.0, bottom: 10.0),
       decoration: BoxDecoration(
