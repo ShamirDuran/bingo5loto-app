@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class ComoJugarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: Text("Bingo 5 App"),
@@ -27,9 +30,9 @@ class ComoJugarPage extends StatelessWidget {
             Column(
               children: [
                 SizedBox(height: 20.0),
+                WhatsappButton(id: _scaffoldKey),
                 Text("Click en el botón para ir a WhatsApp",
                     style: Theme.of(context).textTheme.caption),
-                WhatsappButton(),
               ],
             ),
             SizedBox(height: 30.0),

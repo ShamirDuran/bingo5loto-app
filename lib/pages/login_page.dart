@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     _checkTelefono = false;
     _telefonoController.addListener(_validarTelefono);
     _passwordController.addListener(_validarPassword);
+    _loadSVG();
   }
 
   @override
@@ -26,6 +28,15 @@ class _LoginPageState extends State<LoginPage> {
     _telefonoController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  _loadSVG() async {
+    Future.wait([
+      precachePicture(
+          ExactAssetPicture(
+              SvgPicture.svgStringDecoder, "assets/images/canasta.svg"),
+          null),
+    ]);
   }
 
   _validarTelefono() {
@@ -51,6 +62,28 @@ class _LoginPageState extends State<LoginPage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Theme.of(context).primaryColor,
+          ),
+          onPressed: () => Navigator.pushNamedAndRemoveUntil(
+              context, "home", (route) => false),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.info,
+              color: Theme.of(context).primaryColor,
+              size: 30.0,
+            ),
+            onPressed: () => Navigator.pushNamed(context, "como-jugar"),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (notification) {
@@ -64,7 +97,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.only(
-                    top: 150.0,
                     bottom: 20.0,
                     left: 20.0,
                     right: 20.0,
@@ -72,16 +104,20 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Ingresa los datos que te suministrarón",
-                        style: TextStyle(fontSize: 30.0),
+                      Container(
+                        margin: EdgeInsets.only(top: 60.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          "Ingresa los datos que te suministrarón",
+                          style: TextStyle(fontSize: 30.0),
+                        ),
                       ),
                       SizedBox(height: 40.0),
-                      _inputText(
-                          size, "Télefono", _telefonoController, 9, false),
+                      _inputText(size, "Télefono", _telefonoController, 9,
+                          false, TextInputType.number),
                       SizedBox(height: 20.0),
-                      _inputText(
-                          size, "Contraseña", _passwordController, 6, true),
+                      _inputText(size, "Contraseña", _passwordController, 6,
+                          true, TextInputType.text),
                       SizedBox(height: 60.0),
                       Expanded(child: Text("")),
                       _loginButon(size, context)
@@ -160,12 +196,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _inputText(Size size, String label, TextEditingController controlador,
-      int min, bool obscureStatus) {
+      int min, bool obscureStatus, TextInputType type) {
     return Container(
       height: 75.0,
       width: size.width * 0.8,
       padding: EdgeInsets.symmetric(vertical: 0.0),
       child: TextFormField(
+        keyboardType: type,
         controller: controlador,
         obscureText: obscureStatus,
         style: TextStyle(fontWeight: FontWeight.w300),

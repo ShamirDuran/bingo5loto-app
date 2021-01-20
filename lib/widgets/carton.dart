@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bingo_app/utils/bingo.dart';
 import 'package:bingo_app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -28,64 +30,77 @@ class _CartonState extends State<Carton> {
       margin: EdgeInsets.only(top: 14.0, left: 5.0, right: 7.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        color: Colors.grey.withOpacity(0.5),
+        color: Colors.grey.withOpacity(0.6),
       ),
-      child: Column(
-        children: [
-          Text(
-            "#15031515",
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              fontSize: 12.0,
-            ),
-          ),
-          Table(
+      child: ClipRRect(
+        clipBehavior: Clip.antiAlias,
+        borderRadius: BorderRadius.circular(5.0),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
+          child: Column(
             children: [
-              TableRow(children: [
-                _letraColumna("B", colorCol1),
-                _letraColumna("I", colorCol2),
-                _letraColumna("N", colorCol3),
-                _letraColumna("G", colorCol4),
-                _letraColumna("O", colorCol5),
-              ]),
-              TableRow(children: [
-                _card(carton[0][0]),
-                _card(carton[1][0]),
-                _card(carton[2][0]),
-                _card(carton[3][0]),
-                _card(carton[4][0]),
-              ]),
-              TableRow(children: [
-                _card(carton[0][1]),
-                _card(carton[1][1]),
-                _card(carton[2][1]),
-                _card(carton[3][1]),
-                _card(carton[4][1]),
-              ]),
-              TableRow(children: [
-                _card(carton[0][2]),
-                _card(carton[1][2]),
-                Text(""),
-                _card(carton[3][2]),
-                _card(carton[4][2]),
-              ]),
-              TableRow(children: [
-                _card(carton[0][3]),
-                _card(carton[1][3]),
-                _card(carton[2][3]),
-                _card(carton[3][3]),
-                _card(carton[4][3]),
-              ]),
-              TableRow(children: [
-                _card(carton[0][4]),
-                _card(carton[1][4]),
-                _card(carton[2][4]),
-                _card(carton[3][4]),
-                _card(carton[4][4]),
-              ]),
+              Text(
+                "#15031515",
+                style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  fontSize: 12.0,
+                ),
+              ),
+              Table(
+                children: [
+                  TableRow(children: [
+                    _letraColumna("B", Colors.blue[700].withOpacity(0.7)),
+                    _letraColumna("I", Colors.blue[700].withOpacity(0.7)),
+                    _letraColumna("N", Colors.blue[700].withOpacity(0.7)),
+                    _letraColumna("G", Colors.blue[700].withOpacity(0.7)),
+                    _letraColumna("O", Colors.blue[700].withOpacity(0.7)),
+
+                    // _letraColumna("B", colorCol1),
+                    // _letraColumna("I", colorCol2),
+                    // _letraColumna("N", colorCol3),
+                    // _letraColumna("G", colorCol4),
+                    // _letraColumna("O", colorCol5),
+                  ]),
+                  TableRow(children: [
+                    _card(carton[0][0]),
+                    _card(carton[1][0]),
+                    _card(carton[2][0]),
+                    _card(carton[3][0]),
+                    _card(carton[4][0]),
+                  ]),
+                  TableRow(children: [
+                    _card(carton[0][1]),
+                    _card(carton[1][1]),
+                    _card(carton[2][1]),
+                    _card(carton[3][1]),
+                    _card(carton[4][1]),
+                  ]),
+                  TableRow(children: [
+                    _card(carton[0][2]),
+                    _card(carton[1][2]),
+                    Text(""),
+                    _card(carton[3][2]),
+                    _card(carton[4][2]),
+                  ]),
+                  TableRow(children: [
+                    _card(carton[0][3]),
+                    _card(carton[1][3]),
+                    _card(carton[2][3]),
+                    _card(carton[3][3]),
+                    _card(carton[4][3]),
+                  ]),
+                  TableRow(children: [
+                    _card(carton[0][4]),
+                    _card(carton[1][4]),
+                    _card(carton[2][4]),
+                    _card(carton[3][4]),
+                    _card(carton[4][4]),
+                  ]),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -97,14 +112,14 @@ class _CartonState extends State<Carton> {
       margin: EdgeInsets.all(2.0),
       decoration: BoxDecoration(
           color:
-              widget.balotas.contains(numero) ? Colors.lightBlue : Colors.white,
+              widget.balotas.contains(numero) ? Colors.blue[300] : Colors.white,
           borderRadius: BorderRadius.circular(3.0)),
       child: Text(
         numero.toString(),
         style: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 15,
-          color: Colors.black,
+          color: widget.balotas.contains(numero) ? Colors.white : Colors.black,
         ),
       ),
     );
@@ -119,6 +134,7 @@ class _CartonState extends State<Carton> {
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20.0,
+          color: Colors.white.withOpacity(0.8),
         ),
       ),
       decoration: BoxDecoration(

@@ -25,6 +25,7 @@ class _GamePageState extends State<GamePage> {
       balotas.add(bal);
       setState(() {});
     }
+    print(balotas);
   }
 
   @override

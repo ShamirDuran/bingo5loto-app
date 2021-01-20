@@ -77,7 +77,7 @@ class Bingo {
 
     do {
       bal = r.nextInt(75);
-    } while (balotas.contains(bal));
+    } while (balotas.contains(bal) && bal > 0);
 
     return bal;
   }

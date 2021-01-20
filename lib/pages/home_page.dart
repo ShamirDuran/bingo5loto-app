@@ -13,38 +13,61 @@ class _HomePageState extends State<HomePage> {
     size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (notification) {
             notification.disallowGlow();
             return;
           },
-          child: CustomScrollView(
-            slivers: [
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 25.0, top: 150.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Bingo 5 App",
-                        style: TextStyle(fontSize: 30.0),
-                      ),
-                      Expanded(child: Text("")),
-                      _button("JUGAR", null),
-                      SizedBox(height: 20.0),
-                      _button("COMO JUGAR",
-                          () => Navigator.pushNamed(context, "como-jugar")),
-                      SizedBox(height: 20.0),
-                      _button("ACERDA DE", null),
-                      SizedBox(height: 20.0),
-                    ],
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xffF4E5CD),
+                  Color(0xffF4E5CD),
+                ],
+              ),
+            ),
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 25.0, top: 80.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Bingo 5 App",
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        // Image.asset(
+                        //   "assets/images/bingo-logo.png",
+                        //   height: 350.0,
+                        //   fit: BoxFit.contain,
+                        // ),
+                        Expanded(child: Text("")),
+                        _button("JUGAR",
+                            () => Navigator.pushNamed(context, "login")),
+                        SizedBox(height: 20.0),
+                        _button(
+                          "COMO JUGAR",
+                          () => Navigator.pushNamed(context, "como-jugar"),
+                        ),
+                        SizedBox(height: 20.0),
+                        _button("ACERDA DE", () {}),
+                        SizedBox(height: 20.0),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -52,21 +75,28 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _button(String texto, Function action) {
-    return Container(
-      child: RaisedButton(
-        elevation: 10,
-        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
-        shape: StadiumBorder(),
-        color: Theme.of(context).primaryColor,
-        child: Text(
-          texto,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 17.0,
-            fontWeight: FontWeight.w300,
-          ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(50.0),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color(0xff513921),
+            Color(0xff513921),
+          ]),
         ),
-        onPressed: action,
+        child: FlatButton(
+          padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 25.0),
+          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          child: Text(
+            texto,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: action,
+        ),
       ),
     );
   }

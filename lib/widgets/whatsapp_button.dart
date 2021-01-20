@@ -1,7 +1,12 @@
+import 'package:bingo_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 
 class WhatsappButton extends StatelessWidget {
+  final GlobalKey<ScaffoldState> id;
+
+  WhatsappButton({this.id});
+
   @override
   Widget build(BuildContext context) {
     return InputChip(
@@ -20,7 +25,9 @@ class WhatsappButton extends StatelessWidget {
       ),
       onPressed: () {
         FlutterOpenWhatsapp.sendSingleMessage(
-            "573219355597", "Hola, estoy interesado en jugar Bingo 5 App!");
+                "573219355597", "Hola, estoy interesado en jugar Bingo 5 App!")
+            .catchError(
+                () => showSnackBar("No se pudo abrir WhatsApp", this.id));
       },
     );
   }
