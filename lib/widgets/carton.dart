@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:bingo_app/utils/bingo.dart';
 import 'package:bingo_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class Carton extends StatefulWidget {
   final List<int> balotas;
@@ -13,6 +14,8 @@ class Carton extends StatefulWidget {
 }
 
 class _CartonState extends State<Carton> {
+  var uuid = Uuid();
+  String id;
   Bingo bingo;
   List<List<int>> carton;
 
@@ -25,21 +28,25 @@ class _CartonState extends State<Carton> {
 
   @override
   Widget build(BuildContext context) {
+    id = uuid.v4().toString().substring(0, 13);
+
     return Container(
-      margin: EdgeInsets.only(top: 14.0, left: 5.0, right: 7.0),
+      margin: EdgeInsets.only(top: 14.0, left: 5.0, right: 7.0, bottom: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        color: Colors.grey.withOpacity(0.4),
+        color: Colors.grey[800].withOpacity(0.8),
       ),
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(3.0),
             child: Text(
-              "#15031515",
+              this.id,
               style: TextStyle(
-                fontWeight: FontWeight.w300,
-                fontSize: 12.0,
+                fontFamily: "Josefine",
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.italic,
+                fontSize: 13.5,
               ),
             ),
           ),
@@ -47,17 +54,11 @@ class _CartonState extends State<Carton> {
             border: TableBorder.all(color: Color(0xff302C3C)),
             children: [
               TableRow(children: [
-                _letraColumna("B", Colors.blue[700].withOpacity(0.7)),
-                _letraColumna("I", Colors.blue[700].withOpacity(0.7)),
-                _letraColumna("N", Colors.blue[700].withOpacity(0.7)),
-                _letraColumna("G", Colors.blue[700].withOpacity(0.7)),
-                _letraColumna("O", Colors.blue[700].withOpacity(0.7)),
-
-                // _letraColumna("B", colorCol1),
-                // _letraColumna("I", colorCol2),
-                // _letraColumna("N", colorCol3),
-                // _letraColumna("G", colorCol4),
-                // _letraColumna("O", colorCol5),
+                _letraColumna("B"),
+                _letraColumna("I"),
+                _letraColumna("N"),
+                _letraColumna("G"),
+                _letraColumna("O"),
               ]),
               TableRow(children: [
                 _card(carton[0][0]),
@@ -103,43 +104,48 @@ class _CartonState extends State<Carton> {
 
   Widget _card(int numero) {
     return Container(
-      height: 35.0,
+      // height: 35.0,
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 0.0),
-      // margin: EdgeInsets.all(2.0),
+      padding: EdgeInsets.only(top: 10.0, bottom: 5.0),
+      // padding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 0.0),
       decoration: BoxDecoration(
-        color: widget.balotas.contains(numero)
-            ? Colors.blue[300]
-            : Colors.white.withOpacity(0.8),
-        // borderRadius: BorderRadius.circular(3.0),
+        color: Colors.white.withOpacity(0.8),
+        image: widget.balotas.contains(numero)
+            ? DecorationImage(
+                image: AssetImage("assets/images/star-icon.png"),
+                fit: BoxFit.cover,
+              )
+            : null,
       ),
       child: Text(
         numero.toString(),
         style: TextStyle(
+          fontFamily: "Josefine",
           fontWeight: FontWeight.normal,
-          fontSize: 15,
-          color: Color(0xff302C3C),
+          fontSize: 19,
+          color: colorHeaderCarton,
         ),
       ),
     );
   }
 
-  Widget _letraColumna(String letra, Color color) {
+  Widget _letraColumna(String letra) {
     return Container(
       // margin: EdgeInsets.all(2),
-      padding: EdgeInsets.symmetric(vertical: 6.0),
+      alignment: Alignment.center,
+      padding: EdgeInsets.only(top: 9.0, bottom: 4.5),
       child: Text(
         letra,
         textAlign: TextAlign.center,
         style: TextStyle(
+          fontFamily: "Josefine",
           fontWeight: FontWeight.bold,
           fontSize: 19.0,
           color: Colors.white.withOpacity(0.8),
         ),
       ),
       decoration: BoxDecoration(
-        color: Color(0xff302C3C),
-        // borderRadius: BorderRadius.circular(3.0),
+        color: colorHeaderCarton,
       ),
     );
   }

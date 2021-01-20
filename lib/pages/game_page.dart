@@ -1,4 +1,5 @@
 import 'package:bingo_app/utils/bingo.dart';
+import 'package:bingo_app/utils/utils.dart';
 import 'package:bingo_app/widgets/balotas_container.dart';
 import 'package:bingo_app/widgets/carton.dart';
 import 'package:bingo_app/widgets/tablero_numeros.dart';
@@ -33,33 +34,59 @@ class _GamePageState extends State<GamePage> {
     // numCartones = ModalRoute.of(context).settings.arguments;
     numCartones = 6;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Bingo 5 App"),
-        centerTitle: true,
-        elevation: 1,
-      ),
-      body: _body(),
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/bg-game.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text(
+              nombreApp,
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            centerTitle: true,
+            elevation: 2,
+            // backgroundColor: colorCremaBeag,
+          ),
+          body: _body(),
+        ),
+      ],
     );
   }
 
   Widget _body() {
-    return ListView(
-      children: [
-        // Parte superior
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 7.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BalotasContainer(balotas: this.balotas, action: _canastaOnClick),
-              TableroNumeros(balotas: this.balotas),
-            ],
+    return Container(
+      color: Colors.transparent,
+      child: ListView(
+        physics: BouncingScrollPhysics(),
+        children: [
+          // Parte superior
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: BalotasContainer(
+                      balotas: this.balotas, action: _canastaOnClick),
+                ),
+                Flexible(child: TableroNumeros(balotas: this.balotas)),
+              ],
+            ),
           ),
-        ),
-        _cartones(),
-        SizedBox(height: 20.0),
-      ],
+          _cartones(),
+          SizedBox(height: 20.0),
+        ],
+      ),
     );
   }
 
@@ -69,18 +96,21 @@ class _GamePageState extends State<GamePage> {
     int numFilas = helper.round();
     int numCol = 2;
 
-    return Table(
-      children: [
-        for (var i = 0; i < numFilas; i++)
-          if (i == numFilas - 1 && (helper % 1).round() == 1)
-            TableRow(children: [Carton(balotas: this.balotas), Text("")])
-          else
-            TableRow(
-              children: [
-                for (var j = 0; j < numCol; j++) Carton(balotas: this.balotas)
-              ],
-            ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Table(
+        children: [
+          for (var i = 0; i < numFilas; i++)
+            if (i == numFilas - 1 && (helper % 1).round() == 1)
+              TableRow(children: [Carton(balotas: this.balotas), Text("")])
+            else
+              TableRow(
+                children: [
+                  for (var j = 0; j < numCol; j++) Carton(balotas: this.balotas)
+                ],
+              ),
+        ],
+      ),
     );
   }
 }

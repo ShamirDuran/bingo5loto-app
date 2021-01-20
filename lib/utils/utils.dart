@@ -10,3 +10,5 @@ void showSnackBar(String msg, GlobalKey<ScaffoldState> key) {
 
   key.currentState.showSnackBar(snack);
 }
+
+final String nombreApp = "Bingo 5 Loto";

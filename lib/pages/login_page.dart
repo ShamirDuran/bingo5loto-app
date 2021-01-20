@@ -68,7 +68,6 @@ class _LoginPageState extends State<LoginPage> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Theme.of(context).primaryColor,
           ),
           onPressed: () => Navigator.pushNamedAndRemoveUntil(
               context, "home", (route) => false),
@@ -77,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
           IconButton(
             icon: Icon(
               Icons.info,
-              color: Theme.of(context).primaryColor,
               size: 30.0,
             ),
             onPressed: () => Navigator.pushNamed(context, "como-jugar"),
@@ -168,7 +166,8 @@ class _LoginPageState extends State<LoginPage> {
       }
       print(cartones);
       if (cartones > 0) {
-        Navigator.pushReplacementNamed(context, "game", arguments: cartones);
+        Navigator.pushNamedAndRemoveUntil(context, "game", (route) => false,
+            arguments: cartones);
       } else {
         print("f, contraseña mala");
       }
@@ -181,9 +180,8 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0),
         ),
-        color: Theme.of(context).primaryColor,
         child: Text(
-          "Login",
+          "Confirmar",
           style: TextStyle(
             color: Colors.white,
             fontSize: 20.0,

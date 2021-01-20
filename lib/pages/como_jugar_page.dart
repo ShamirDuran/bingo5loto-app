@@ -1,3 +1,5 @@
+import 'package:bingo_app/utils/utils.dart';
+import 'package:bingo_app/widgets/title_appbar.dart';
 import 'package:bingo_app/widgets/whatsapp_button.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +12,9 @@ class ComoJugarPage extends StatelessWidget {
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text("Bingo 5 App"),
+        title: TitleAppbar(
+          titulo: nombreApp,
+        ),
         centerTitle: true,
         elevation: 1,
       ),

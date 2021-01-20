@@ -17,7 +17,7 @@ class TableroNumeros extends StatelessWidget {
       margin: EdgeInsets.only(top: 15.0),
       padding: EdgeInsets.all(6.0),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.8),
+        color: Colors.black.withOpacity(0.85),
         borderRadius: BorderRadius.circular(3.0),
       ),
       child: Table(

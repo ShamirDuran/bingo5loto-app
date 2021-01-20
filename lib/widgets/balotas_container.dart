@@ -29,13 +29,24 @@ class BalotasContainer extends StatelessWidget {
         children: [
           Text(
             "Toca la canasta para sacar una balota",
-            style: TextStyle(fontWeight: FontWeight.w300),
+            overflow: TextOverflow.clip,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontFamily: "Josefine",
+              fontSize: 18.0,
+            ),
           ),
           SizedBox(height: 5.0),
           InputChip(
-            onSelected: null,
-            disabledColor: Colors.grey[200],
-            label: Text('${balotas.length}/18'),
+            onSelected: (value) {},
+            backgroundColor: Colors.indigo,
+            label: Text(
+              '${balotas.length}/18',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
           _imagenCanasta(),
           SizedBox(height: 7.0),
@@ -81,7 +92,7 @@ class BalotasContainer extends StatelessWidget {
         num.toString(),
         style: TextStyle(
           color: Colors.white,
-          fontSize: 20.0,
+          fontSize: 23.0,
           fontWeight: FontWeight.bold,
         ),
       ),
