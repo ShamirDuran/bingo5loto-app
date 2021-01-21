@@ -12,8 +12,6 @@ class BalotasContainer extends StatelessWidget {
   final Function action;
   final bingo = Bingo();
   final radius = 25.0;
-  // TODO: pasar letra por parametros para el full carton
-  final String letra = "T";
 
   BalotasContainer({
     @required this.balotas,
@@ -42,7 +40,7 @@ class BalotasContainer extends StatelessWidget {
             onSelected: (value) {},
             backgroundColor: Colors.indigo,
             label: Text(
-              '${balotas.length}/18',
+              '${balotas.length}/30',
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -76,14 +74,14 @@ class BalotasContainer extends StatelessWidget {
   }
 
   Widget _balota() {
-    Color color = Colors.blue;
+    Color color = Colors.indigo;
     final num = balotas.last;
 
-    if (num >= 1 && num <= 15) color = colorCol1;
-    if (num >= 16 && num <= 30) color = colorCol2;
-    if (num >= 31 && num <= 45) color = colorCol3;
-    if (num >= 46 && num <= 60) color = colorCol4;
-    if (num >= 61 && num <= 75) color = colorCol5;
+    // if (num >= 1 && num <= 15) color = colorCol1;
+    // if (num >= 16 && num <= 30) color = colorCol2;
+    // if (num >= 31 && num <= 45) color = colorCol3;
+    // if (num >= 46 && num <= 60) color = colorCol4;
+    // if (num >= 61 && num <= 75) color = colorCol5;
 
     return CircleAvatar(
       radius: this.radius,

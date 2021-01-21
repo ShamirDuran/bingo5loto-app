@@ -43,9 +43,10 @@ class TableroNumeros extends StatelessWidget {
         value.toString(),
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: balotas.contains(value) ? Colors.white : Colors.grey[600],
+          color:
+              balotas.contains(value) ? Colors.yellow[400] : Colors.grey[600],
           fontSize: 12.0,
-          fontWeight: FontWeight.w300,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

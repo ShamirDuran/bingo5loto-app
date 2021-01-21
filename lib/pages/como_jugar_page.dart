@@ -23,7 +23,7 @@ class ComoJugarPage extends StatelessWidget {
         child: ListView(
           children: [
             SizedBox(height: 10.0),
-            titleText(context, "¿Comó jugar a Bingo 5 App?"),
+            titleText(context, '¿Comó jugar a Bingo 5 Loto?'),
             SizedBox(height: 10.0),
             bodyText(
                 "Para poder jugar debes comprar tripletas (3 cartones) con las que podras jugar y obtener diferentes premios."),
@@ -40,10 +40,10 @@ class ComoJugarPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 30.0),
-            titleText(context, "¿Comó obtengo una cuenta?"),
+            titleText(context, "¿Cómo obtengo un código de compra?"),
             SizedBox(height: 10.0),
             bodyText(
-                "Una vez que realices la compra de almenos una tripleta, se te suministrara un usuario (que sera tu teléfono) y una contraseña para que puedas empezar a jugar.")
+                "Una vez que realices la compra de al menos una tripleta, se te suministrará un usuario (que será tu teléfono) y un código de compra para que puedas empezar a jugar.")
           ],
         ),
       ),
@@ -56,6 +56,7 @@ class ComoJugarPage extends StatelessWidget {
       );
 
   Widget bodyText(String texto) => Text(texto,
+      // textAlign: TextAlign.justify,
       style: TextStyle(
         fontWeight: FontWeight.w300,
         fontSize: 15.0,

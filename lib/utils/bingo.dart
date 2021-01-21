@@ -56,28 +56,14 @@ class Bingo {
     return fila;
   }
 
-  // List<List<bool>> generarControl() {
-  //   List<List<bool>> control = List();
-  //   control.add(_falseList());
-  //   control.add(_falseList());
-  //   control.add(_falseList());
-  //   control.add(_falseList());
-  //   control.add(_falseList());
-  //   return control;
-  // }
-
-  // _falseList() {
-  //   List<bool> list = List.filled(5, false);
-  //   return list;
-  // }
-
   int generarBalota(List<int> balotas) {
     Random r = Random();
     int bal;
 
     do {
-      bal = r.nextInt(75);
-    } while (balotas.contains(bal) && bal > 0);
+      bal = r.nextInt(76);
+      if (bal == 0) bal++;
+    } while (balotas.contains(bal));
 
     return bal;
   }

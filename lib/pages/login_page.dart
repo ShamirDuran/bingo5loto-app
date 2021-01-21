@@ -1,5 +1,5 @@
+import 'package:bingo_app/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,7 +9,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _telefonoController;
   TextEditingController _passwordController;
+  GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   bool _checkTelefono, _checkPassword;
+  int minPhone, minPwd;
 
   @override
   void initState() {
@@ -20,7 +22,9 @@ class _LoginPageState extends State<LoginPage> {
     _checkTelefono = false;
     _telefonoController.addListener(_validarTelefono);
     _passwordController.addListener(_validarPassword);
-    _loadSVG();
+    minPhone = 10;
+    minPwd = 8;
+    loadSVG();
   }
 
   @override
@@ -28,15 +32,6 @@ class _LoginPageState extends State<LoginPage> {
     _telefonoController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  _loadSVG() async {
-    Future.wait([
-      precachePicture(
-          ExactAssetPicture(
-              SvgPicture.svgStringDecoder, "assets/images/canasta.svg"),
-          null),
-    ]);
   }
 
   _validarTelefono() {
@@ -49,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _validarPassword() {
-    if (_passwordController.text.length >= 6) {
+    if (_passwordController.text.length > 7) {
       _checkPassword = true;
     } else {
       _checkPassword = false;
@@ -62,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      key: scaffoldkey,
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
@@ -72,15 +68,6 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () => Navigator.pushNamedAndRemoveUntil(
               context, "home", (route) => false),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.info,
-              size: 30.0,
-            ),
-            onPressed: () => Navigator.pushNamed(context, "como-jugar"),
-          ),
-        ],
       ),
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
@@ -99,28 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                     left: 20.0,
                     right: 20.0,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 60.0),
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          "Ingresa los datos que te suministrarón",
-                          style: TextStyle(fontSize: 30.0),
-                        ),
-                      ),
-                      SizedBox(height: 40.0),
-                      _inputText(size, "Télefono", _telefonoController, 9,
-                          false, TextInputType.number),
-                      SizedBox(height: 20.0),
-                      _inputText(size, "Contraseña", _passwordController, 6,
-                          true, TextInputType.text),
-                      SizedBox(height: 60.0),
-                      Expanded(child: Text("")),
-                      _loginButon(size, context)
-                    ],
-                  ),
+                  child: _body(size, context),
                 ),
               )
             ],
@@ -130,46 +96,90 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _body(Size size, BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Titulo
+        Container(
+          margin: EdgeInsets.only(top: 60.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Text(
+            "Ingresa los datos que te suministraron",
+            style: TextStyle(fontSize: 30.0),
+          ),
+        ),
+
+        // Telefono
+        SizedBox(height: 40.0),
+        _inputText(size, "Télefono", _telefonoController, this.minPhone, false,
+            TextInputType.text),
+
+        // Contraseña
+        SizedBox(height: 20.0),
+        _inputText(size, "Código de Compra", _passwordController, this.minPwd,
+            false, TextInputType.text),
+
+        // Recordatorio
+        SizedBox(height: 20.0),
+        Expanded(child: Text("")),
+        Container(
+          width: size.width * 0.8,
+          child: Text(
+            "Recuerda tomar una foto de los datos, sera necesario para reclamar los premios",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ),
+
+        // Login button
+        Expanded(child: Text("")),
+        _loginButon(size, context),
+        // DividerExpanded(),
+        SizedBox(height: 30.0),
+        _comoObtenerCodigo(context),
+        SizedBox(height: 5.0),
+      ],
+    );
+  }
+
+  Widget _comoObtenerCodigo(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, "como-jugar"),
+      child: Text(
+        "¿Cómo consigo un código de compra?",
+        style: TextStyle(
+          color: Colors.blue,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
   Widget _loginButon(Size size, BuildContext context) {
     _navigation() {
-      int cartones = 0;
+      int codigo = 0;
       String s = _passwordController.text.substring(0, 1);
-      switch (s) {
-        case "1":
-          cartones = int.parse(s) * 3;
-          break;
-        case "2":
-          cartones = int.parse(s) * 3;
-          break;
-        case "3":
-          cartones = int.parse(s) * 3;
-          break;
-        case "4":
-          cartones = int.parse(s) * 3;
-          break;
-        case "5":
-          cartones = int.parse(s) * 3;
-          break;
-        case "6":
-          cartones = 1;
-          break;
-        case "7":
-          cartones = 1;
-          break;
-        case "8":
-          cartones = 1;
-          break;
-        case "9":
-          cartones = 1;
-          break;
-        default:
+
+      try {
+        codigo = int.parse(s);
+        if (codigo == 0 || codigo > 9) codigo = 0;
+      } catch (e) {
+        showSnackBar("Código de Compra invalido", scaffoldkey);
       }
-      print(cartones);
-      if (cartones > 0) {
-        Navigator.pushNamedAndRemoveUntil(context, "game", (route) => false,
-            arguments: cartones);
+
+      if (codigo > 0) {
+        showDialogPer(
+            context,
+            "Recordatorio",
+            "Verifica que hayas tomado la foto de los datos, de otra manera, no podras reclamar los premios",
+            () => Navigator.pushNamedAndRemoveUntil(
+                context, "pre-game", (route) => false,
+                arguments: codigo));
       } else {
-        print("f, contraseña mala");
+        showSnackBar("Código de Compra invalido", scaffoldkey);
       }
     }
 
@@ -181,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Text(
-          "Confirmar",
+          "Continuar",
           style: TextStyle(
             color: Colors.white,
             fontSize: 20.0,
@@ -205,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
         obscureText: obscureStatus,
         style: TextStyle(fontWeight: FontWeight.w300),
         decoration: InputDecoration(
-          helperText: 'Debe tener almenos $min caracteres',
+          helperText: 'Debe tener al menos $min caracteres',
           labelText: label,
           labelStyle: TextStyle(fontWeight: FontWeight.w300),
           border: OutlineInputBorder(),

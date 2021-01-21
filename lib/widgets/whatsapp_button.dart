@@ -25,7 +25,7 @@ class WhatsappButton extends StatelessWidget {
       ),
       onPressed: () {
         FlutterOpenWhatsapp.sendSingleMessage(
-                "573219355597", "Hola, estoy interesado en jugar Bingo 5 App!")
+                "573125320126", "Hola, estoy interesado en jugar Bingo 5 Loto!")
             .catchError(
                 () => showSnackBar("No se pudo abrir WhatsApp", this.id));
       },

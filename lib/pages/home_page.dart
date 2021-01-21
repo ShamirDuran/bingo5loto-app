@@ -55,7 +55,7 @@ Loto
                             () => Navigator.pushNamed(context, "como-jugar"),
                           ),
                           SizedBox(height: 25.0),
-                          _button("ACERDA DE", () {}),
+                          _button("TERMINOS Y CONDICIONES", () {}),
                           SizedBox(height: 25.0),
                         ],
                       ),

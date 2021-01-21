@@ -112,7 +112,7 @@ class _CartonState extends State<Carton> {
         image: widget.balotas.contains(numero)
             ? DecorationImage(
                 image: AssetImage("assets/images/star-icon.png"),
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               )
             : null,
       ),
