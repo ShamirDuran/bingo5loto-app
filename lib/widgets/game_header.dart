@@ -8,6 +8,7 @@ class GameHeader extends StatelessWidget {
   final String letra;
   final String idSala;
   final int maxBalotas;
+  final bool gano;
 
   GameHeader({
     @required this.balotas,
@@ -15,6 +16,7 @@ class GameHeader extends StatelessWidget {
     @required this.letra,
     @required this.idSala,
     @required this.maxBalotas,
+    @required this.gano,
   });
 
   @override
@@ -30,6 +32,7 @@ class GameHeader extends StatelessWidget {
               balotas: this.balotas,
               action: canastaOnClick,
               maxBalotas: maxBalotas,
+              gano: this.gano,
             ),
           ),
           // parte del tablero negro y patron

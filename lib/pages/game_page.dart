@@ -19,11 +19,13 @@ class _GamePageState extends State<GamePage> {
   List<List<List<int>>> cartones = List();
   List<Widget> menu;
   List<Object> args;
+  bool _gano = false;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    maxBalotas = 30;
+    maxBalotas = 60;
     new Future.delayed(Duration.zero, () {
       args = ModalRoute.of(context).settings.arguments;
       letra = args[0];
@@ -36,89 +38,21 @@ class _GamePageState extends State<GamePage> {
 
   /// Evento de onClick en la canasta
   _canastaOnClick() {
-    if (balotas.length < maxBalotas) {
+    if (balotas.length < maxBalotas && !this._gano) {
       int bal = bingo.generarBalota(balotas);
       balotas.add(bal);
-
-      if (letra.substring(letra.length - 5, letra.length - 4) == "T") {
-        cartones.forEach((carton) {
-          bool check = true;
-          if (!balotas.contains(carton[0][0])) check = false;
-          if (!balotas.contains(carton[1][0])) check = false;
-          if (!balotas.contains(carton[2][0])) check = false;
-          if (!balotas.contains(carton[2][1])) check = false;
-          if (!balotas.contains(carton[2][3])) check = false;
-          if (!balotas.contains(carton[2][4])) check = false;
-          if (!balotas.contains(carton[3][0])) check = false;
-          if (!balotas.contains(carton[4][0])) check = false;
-
-          if (check) {
-            print(carton);
-            print("gano");
-          } else
-            print("no gano");
-        });
-      }
-
-      if (letra.substring(letra.length - 5, letra.length - 4) == "+") {
-        cartones.forEach((carton) {
-          bool check = true;
-          if (!balotas.contains(carton[0][2])) check = false;
-          if (!balotas.contains(carton[1][2])) check = false;
-          if (!balotas.contains(carton[2][0])) check = false;
-          if (!balotas.contains(carton[2][1])) check = false;
-          if (!balotas.contains(carton[2][3])) check = false;
-          if (!balotas.contains(carton[2][4])) check = false;
-          if (!balotas.contains(carton[3][2])) check = false;
-          if (!balotas.contains(carton[4][2])) check = false;
-
-          if (check) {
-            print(carton);
-            print("gano");
-          } else
-            print("no gano");
-        });
-      }
-
-      if (letra.substring(letra.length - 5, letra.length - 4) == "x") {
-        cartones.forEach((carton) {
-          bool check = true;
-          if (!balotas.contains(carton[0][0])) check = false;
-          if (!balotas.contains(carton[0][4])) check = false;
-          if (!balotas.contains(carton[1][1])) check = false;
-          if (!balotas.contains(carton[1][2])) check = false;
-          if (!balotas.contains(carton[3][1])) check = false;
-          if (!balotas.contains(carton[3][3])) check = false;
-          if (!balotas.contains(carton[4][0])) check = false;
-          if (!balotas.contains(carton[4][4])) check = false;
-
-          if (check) {
-            print(carton);
-            print("gano");
-          } else
-            print("no gano");
-        });
-      }
-
-      if (letra.substring(letra.length - 5, letra.length - 4) == "Y") {
-        cartones.forEach((carton) {
-          bool check = true;
-
-          if (!balotas.contains(carton[0][0])) check = false;
-          if (!balotas.contains(carton[1][1])) check = false;
-          if (!balotas.contains(carton[2][3])) check = false;
-          if (!balotas.contains(carton[2][4])) check = false;
-          if (!balotas.contains(carton[3][1])) check = false;
-          if (!balotas.contains(carton[4][0])) check = false;
-
-          if (check) {
-            print(carton);
-            print("gano");
-          } else
-            print("no gano");
-        });
-      }
+      _validarVictoria();
       setState(() {});
+    }
+    if (balotas.length == maxBalotas)
+      showSnackBar("No te quedan balotas por jugar", scaffoldKey);
+  }
+
+  _validarVictoria() {
+    if (validarCartones(this.letra, this.cartones, this.balotas)) {
+      showInfoDialog(
+          context, "Ganaste", "BINGOOO GANA PREMIO-1. FELICITACIONES");
+      this._gano = true;
     }
   }
 
@@ -204,8 +138,8 @@ class _GamePageState extends State<GamePage> {
           ),
         ),
         Scaffold(
+          key: scaffoldKey,
           backgroundColor: Colors.transparent,
-          // AppBar
           appBar: _buildAppBar(),
           body: _body(),
         ),
@@ -255,6 +189,7 @@ class _GamePageState extends State<GamePage> {
             canastaOnClick: this._canastaOnClick,
             idSala: this.idSala,
             maxBalotas: this.maxBalotas,
+            gano: this._gano,
           ),
           // Lista de cartones
           SizedBox(height: 10.0),

@@ -13,11 +13,13 @@ class BalotasContainer extends StatelessWidget {
   final bingo = Bingo();
   final radius = 25.0;
   final int maxBalotas;
+  final bool gano;
 
   BalotasContainer({
     @required this.balotas,
     @required this.action,
     @required this.maxBalotas,
+    @required this.gano,
   });
 
   @override
@@ -28,7 +30,9 @@ class BalotasContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Toca la canasta para sacar una balota",
+            this.gano
+                ? "Ganaste!. No olvides reclamar tu premio"
+                : "Toca la canasta para sacar una balota",
             overflow: TextOverflow.clip,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -66,12 +70,21 @@ class BalotasContainer extends StatelessWidget {
   Widget _imagenCanasta() {
     return GestureDetector(
       onTap: action,
-      child: Container(
-        child: SvgPicture.asset(
-          "assets/images/canasta.svg",
-          width: 150.0,
-        ),
-      ),
+      child: this.gano
+          ? ColorFiltered(
+              colorFilter:
+                  ColorFilter.mode(Colors.grey[700], BlendMode.modulate),
+              child: SvgPicture.asset(
+                "assets/images/canasta.svg",
+                width: 150.0,
+              ),
+            )
+          : Container(
+              child: SvgPicture.asset(
+                "assets/images/canasta.svg",
+                width: 150.0,
+              ),
+            ),
     );
   }
 
