@@ -96,56 +96,32 @@ bool validarCartones(
     String letra, List<List<List<int>>> cartones, List<int> balotas) {
   bool check = true;
 
-  if (letra.substring(letra.length - 5, letra.length - 4) == "T") {
+  if (letra == "full") {
     for (var carton in cartones) {
       check = true;
       if (!balotas.contains(carton[0][0])) check = false;
+      if (!balotas.contains(carton[0][1])) check = false;
+      if (!balotas.contains(carton[0][2])) check = false;
+      if (!balotas.contains(carton[0][3])) check = false;
+      if (!balotas.contains(carton[0][4])) check = false;
       if (!balotas.contains(carton[1][0])) check = false;
+      if (!balotas.contains(carton[1][1])) check = false;
+      if (!balotas.contains(carton[1][2])) check = false;
+      if (!balotas.contains(carton[1][3])) check = false;
+      if (!balotas.contains(carton[1][4])) check = false;
       if (!balotas.contains(carton[2][0])) check = false;
       if (!balotas.contains(carton[2][1])) check = false;
       if (!balotas.contains(carton[2][3])) check = false;
       if (!balotas.contains(carton[2][4])) check = false;
       if (!balotas.contains(carton[3][0])) check = false;
-      if (!balotas.contains(carton[4][0])) check = false;
-
-      if (check) {
-        print(carton);
-        print("gano");
-        break;
-      }
-    }
-  }
-
-  if (letra.substring(letra.length - 5, letra.length - 4) == "+") {
-    for (var carton in cartones) {
-      check = true;
-      if (!balotas.contains(carton[0][2])) check = false;
-      if (!balotas.contains(carton[1][2])) check = false;
-      if (!balotas.contains(carton[2][0])) check = false;
-      if (!balotas.contains(carton[2][1])) check = false;
-      if (!balotas.contains(carton[2][3])) check = false;
-      if (!balotas.contains(carton[2][4])) check = false;
-      if (!balotas.contains(carton[3][2])) check = false;
-      if (!balotas.contains(carton[4][2])) check = false;
-
-      if (check) {
-        print(carton);
-        print("gano");
-        break;
-      }
-    }
-  }
-
-  if (letra.substring(letra.length - 5, letra.length - 4) == "x") {
-    for (var carton in cartones) {
-      check = true;
-      if (!balotas.contains(carton[0][0])) check = false;
-      if (!balotas.contains(carton[0][4])) check = false;
-      if (!balotas.contains(carton[1][1])) check = false;
-      if (!balotas.contains(carton[1][2])) check = false;
       if (!balotas.contains(carton[3][1])) check = false;
+      if (!balotas.contains(carton[3][2])) check = false;
       if (!balotas.contains(carton[3][3])) check = false;
+      if (!balotas.contains(carton[3][4])) check = false;
       if (!balotas.contains(carton[4][0])) check = false;
+      if (!balotas.contains(carton[4][1])) check = false;
+      if (!balotas.contains(carton[4][2])) check = false;
+      if (!balotas.contains(carton[4][3])) check = false;
       if (!balotas.contains(carton[4][4])) check = false;
 
       if (check) {
@@ -154,24 +130,85 @@ bool validarCartones(
         break;
       }
     }
-  }
+  } else {
+    if (letra.substring(letra.length - 5, letra.length - 4) == "T") {
+      for (var carton in cartones) {
+        check = true;
+        if (!balotas.contains(carton[0][0])) check = false;
+        if (!balotas.contains(carton[1][0])) check = false;
+        if (!balotas.contains(carton[2][0])) check = false;
+        if (!balotas.contains(carton[2][1])) check = false;
+        if (!balotas.contains(carton[2][3])) check = false;
+        if (!balotas.contains(carton[2][4])) check = false;
+        if (!balotas.contains(carton[3][0])) check = false;
+        if (!balotas.contains(carton[4][0])) check = false;
 
-  if (letra.substring(letra.length - 5, letra.length - 4) == "Y") {
-    for (var carton in cartones) {
-      check = true;
-      if (!balotas.contains(carton[0][0])) check = false;
-      if (!balotas.contains(carton[1][1])) check = false;
-      if (!balotas.contains(carton[2][3])) check = false;
-      if (!balotas.contains(carton[2][4])) check = false;
-      if (!balotas.contains(carton[3][1])) check = false;
-      if (!balotas.contains(carton[4][0])) check = false;
+        if (check) {
+          print(carton);
+          print("gano");
+          break;
+        }
+      }
+    }
 
-      if (check) {
-        print(carton);
-        print("gano");
-        break;
+    if (letra.substring(letra.length - 5, letra.length - 4) == "+") {
+      for (var carton in cartones) {
+        check = true;
+        if (!balotas.contains(carton[0][2])) check = false;
+        if (!balotas.contains(carton[1][2])) check = false;
+        if (!balotas.contains(carton[2][0])) check = false;
+        if (!balotas.contains(carton[2][1])) check = false;
+        if (!balotas.contains(carton[2][3])) check = false;
+        if (!balotas.contains(carton[2][4])) check = false;
+        if (!balotas.contains(carton[3][2])) check = false;
+        if (!balotas.contains(carton[4][2])) check = false;
+
+        if (check) {
+          print(carton);
+          print("gano");
+          break;
+        }
+      }
+    }
+
+    if (letra.substring(letra.length - 5, letra.length - 4) == "x") {
+      for (var carton in cartones) {
+        check = true;
+        if (!balotas.contains(carton[0][0])) check = false;
+        if (!balotas.contains(carton[0][4])) check = false;
+        if (!balotas.contains(carton[1][1])) check = false;
+        if (!balotas.contains(carton[1][2])) check = false;
+        if (!balotas.contains(carton[3][1])) check = false;
+        if (!balotas.contains(carton[3][3])) check = false;
+        if (!balotas.contains(carton[4][0])) check = false;
+        if (!balotas.contains(carton[4][4])) check = false;
+
+        if (check) {
+          print(carton);
+          print("gano");
+          break;
+        }
+      }
+    }
+
+    if (letra.substring(letra.length - 5, letra.length - 4) == "Y") {
+      for (var carton in cartones) {
+        check = true;
+        if (!balotas.contains(carton[0][0])) check = false;
+        if (!balotas.contains(carton[1][1])) check = false;
+        if (!balotas.contains(carton[2][3])) check = false;
+        if (!balotas.contains(carton[2][4])) check = false;
+        if (!balotas.contains(carton[3][1])) check = false;
+        if (!balotas.contains(carton[4][0])) check = false;
+
+        if (check) {
+          print(carton);
+          print("gano");
+          break;
+        }
       }
     }
   }
+
   return check;
 }

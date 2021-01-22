@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         "como-jugar": (_) => ComoJugarPage(),
         "login": (_) => LoginPage(),
         "pre-game": (_) => PreGamePage(),
+        // "game": (_) => GameTab(),
         "game": (_) => GamePage(),
       },
     );

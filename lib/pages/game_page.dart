@@ -1,7 +1,7 @@
 import 'package:bingo_app/utils/bingo.dart';
 import 'package:bingo_app/utils/utils.dart';
-import 'package:bingo_app/widgets/carton.dart';
-import 'package:bingo_app/widgets/game_header.dart';
+import 'package:bingo_app/widgets/game_patron.dart';
+import 'package:bingo_app/widgets/game_pleno.dart';
 import 'package:bingo_app/widgets/title_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,20 +12,17 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  List<int> balotas = List();
   Bingo bingo = Bingo();
-  int codigo, numCartones, multiplicador, maxBalotas;
+  int codigo, numCartones, multiplicador;
   String letra, idSala;
   List<List<List<int>>> cartones = List();
   List<Widget> menu;
   List<Object> args;
-  bool _gano = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    maxBalotas = 60;
     new Future.delayed(Duration.zero, () {
       args = ModalRoute.of(context).settings.arguments;
       letra = args[0];
@@ -34,26 +31,6 @@ class _GamePageState extends State<GamePage> {
       _calculos();
     });
     _initMenu();
-  }
-
-  /// Evento de onClick en la canasta
-  _canastaOnClick() {
-    if (balotas.length < maxBalotas && !this._gano) {
-      int bal = bingo.generarBalota(balotas);
-      balotas.add(bal);
-      _validarVictoria();
-      setState(() {});
-    }
-    if (balotas.length == maxBalotas)
-      showSnackBar("No te quedan balotas por jugar", scaffoldKey);
-  }
-
-  _validarVictoria() {
-    if (validarCartones(this.letra, this.cartones, this.balotas)) {
-      showInfoDialog(
-          context, "Ganaste", "BINGOOO GANA PREMIO-1. FELICITACIONES");
-      this._gano = true;
-    }
   }
 
   /// Se crea la lista que sera usada para el menu que se despiega con el boton de la appbar
@@ -137,11 +114,30 @@ class _GamePageState extends State<GamePage> {
             ),
           ),
         ),
-        Scaffold(
-          key: scaffoldKey,
-          backgroundColor: Colors.transparent,
-          appBar: _buildAppBar(),
-          body: _body(),
+        DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: Colors.transparent,
+            appBar: _buildAppBar(),
+            body: TabBarView(
+              children: [
+                GamePatron(
+                  letra: this.letra,
+                  idSala: this.idSala,
+                  numCartones: this.numCartones,
+                  cartones: this.cartones,
+                  scaffoldKey: this.scaffoldKey,
+                ),
+                GamePleno(
+                  idSala: this.idSala,
+                  cartones: this.cartones,
+                  numCartones: this.numCartones,
+                  scaffoldKey: this.scaffoldKey,
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -152,6 +148,21 @@ class _GamePageState extends State<GamePage> {
       elevation: 2,
       title: TitleAppbar(titulo: nombreApp),
       centerTitle: true,
+      automaticallyImplyLeading: false,
+      bottom: TabBar(
+        indicatorColor: Colors.yellow,
+        tabs: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14.0),
+            child: Text(
+                'PATRON ${this.letra.substring(letra.length - 5, letra.length - 4).toUpperCase()}'),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14.0),
+            child: Text("PATRON PLENO"),
+          ),
+        ],
+      ),
       leading: multiplicador > 1
           ? Center(
               child: PopupMenuButton(
@@ -173,56 +184,6 @@ class _GamePageState extends State<GamePage> {
             )
           : null,
       actions: this.menu,
-    );
-  }
-
-  Widget _body() {
-    return Container(
-      color: Colors.transparent,
-      child: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          // Parte superior
-          GameHeader(
-            balotas: this.balotas,
-            letra: this.letra,
-            canastaOnClick: this._canastaOnClick,
-            idSala: this.idSala,
-            maxBalotas: this.maxBalotas,
-            gano: this._gano,
-          ),
-          // Lista de cartones
-          SizedBox(height: 10.0),
-          _cartones(),
-          SizedBox(height: 20.0),
-        ],
-      ),
-    );
-  }
-
-  Widget _cartones() {
-    int divisor = 2;
-    num helper = this.numCartones / divisor;
-    int numFilas = helper.round();
-    int posIndex = 0;
-
-    TableRow _tableRow() {
-      final temp = posIndex;
-      posIndex = posIndex + 2;
-
-      return TableRow(children: [
-        Carton(balotas: this.balotas, carton: this.cartones[temp]),
-        cartones.length > temp + 1
-            ? Carton(balotas: this.balotas, carton: this.cartones[temp + 1])
-            : Text(""),
-      ]);
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: Table(
-        children: [for (var i = 0; i < numFilas; i++) _tableRow()],
-      ),
     );
   }
 }

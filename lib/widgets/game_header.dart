@@ -30,8 +30,8 @@ class GameHeader extends StatelessWidget {
           Flexible(
             child: BalotasContainer(
               balotas: this.balotas,
-              action: canastaOnClick,
-              maxBalotas: maxBalotas,
+              action: this.canastaOnClick,
+              maxBalotas: this.maxBalotas,
               gano: this.gano,
             ),
           ),

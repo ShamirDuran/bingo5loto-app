@@ -1,28 +1,19 @@
 import 'dart:ui';
-
 import 'package:bingo_app/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class Carton extends StatefulWidget {
   final List<int> balotas;
   final List<List<int>> carton;
-  Carton({@required this.balotas, @required this.carton});
+  final String idSala;
+  Carton(
+      {@required this.balotas, @required this.carton, @required this.idSala});
 
   @override
   _CartonState createState() => _CartonState();
 }
 
 class _CartonState extends State<Carton> {
-  var uuid = Uuid();
-  String id;
-
-  @override
-  void initState() {
-    super.initState();
-    id = uuid.v4().toString().substring(0, 13);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +27,7 @@ class _CartonState extends State<Carton> {
           Container(
             padding: EdgeInsets.all(3.0),
             child: Text(
-              this.id,
+              widget.idSala,
               style: TextStyle(
                 fontFamily: "Josefine",
                 fontWeight: FontWeight.w400,
