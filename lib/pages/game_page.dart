@@ -18,12 +18,19 @@ class _GamePageState extends State<GamePage> {
   String letra, idSala;
   List<List<List<int>>> cartones = List();
   List<Widget> menu;
+  List<Object> args;
 
   @override
   void initState() {
     super.initState();
-    letra = letraAleatoria();
     maxBalotas = 30;
+    new Future.delayed(Duration.zero, () {
+      args = ModalRoute.of(context).settings.arguments;
+      letra = args[0];
+      codigo = args[1];
+      idSala = args[2];
+      _calculos();
+    });
     _initMenu();
   }
 
@@ -32,6 +39,85 @@ class _GamePageState extends State<GamePage> {
     if (balotas.length < maxBalotas) {
       int bal = bingo.generarBalota(balotas);
       balotas.add(bal);
+
+      if (letra.substring(letra.length - 5, letra.length - 4) == "T") {
+        cartones.forEach((carton) {
+          bool check = true;
+          if (!balotas.contains(carton[0][0])) check = false;
+          if (!balotas.contains(carton[1][0])) check = false;
+          if (!balotas.contains(carton[2][0])) check = false;
+          if (!balotas.contains(carton[2][1])) check = false;
+          if (!balotas.contains(carton[2][3])) check = false;
+          if (!balotas.contains(carton[2][4])) check = false;
+          if (!balotas.contains(carton[3][0])) check = false;
+          if (!balotas.contains(carton[4][0])) check = false;
+
+          if (check) {
+            print(carton);
+            print("gano");
+          } else
+            print("no gano");
+        });
+      }
+
+      if (letra.substring(letra.length - 5, letra.length - 4) == "+") {
+        cartones.forEach((carton) {
+          bool check = true;
+          if (!balotas.contains(carton[0][2])) check = false;
+          if (!balotas.contains(carton[1][2])) check = false;
+          if (!balotas.contains(carton[2][0])) check = false;
+          if (!balotas.contains(carton[2][1])) check = false;
+          if (!balotas.contains(carton[2][3])) check = false;
+          if (!balotas.contains(carton[2][4])) check = false;
+          if (!balotas.contains(carton[3][2])) check = false;
+          if (!balotas.contains(carton[4][2])) check = false;
+
+          if (check) {
+            print(carton);
+            print("gano");
+          } else
+            print("no gano");
+        });
+      }
+
+      if (letra.substring(letra.length - 5, letra.length - 4) == "x") {
+        cartones.forEach((carton) {
+          bool check = true;
+          if (!balotas.contains(carton[0][0])) check = false;
+          if (!balotas.contains(carton[0][4])) check = false;
+          if (!balotas.contains(carton[1][1])) check = false;
+          if (!balotas.contains(carton[1][2])) check = false;
+          if (!balotas.contains(carton[3][1])) check = false;
+          if (!balotas.contains(carton[3][3])) check = false;
+          if (!balotas.contains(carton[4][0])) check = false;
+          if (!balotas.contains(carton[4][4])) check = false;
+
+          if (check) {
+            print(carton);
+            print("gano");
+          } else
+            print("no gano");
+        });
+      }
+
+      if (letra.substring(letra.length - 5, letra.length - 4) == "Y") {
+        cartones.forEach((carton) {
+          bool check = true;
+
+          if (!balotas.contains(carton[0][0])) check = false;
+          if (!balotas.contains(carton[1][1])) check = false;
+          if (!balotas.contains(carton[2][3])) check = false;
+          if (!balotas.contains(carton[2][4])) check = false;
+          if (!balotas.contains(carton[3][1])) check = false;
+          if (!balotas.contains(carton[4][0])) check = false;
+
+          if (check) {
+            print(carton);
+            print("gano");
+          } else
+            print("no gano");
+        });
+      }
       setState(() {});
     }
   }
@@ -107,13 +193,6 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Object> args = ModalRoute.of(context).settings.arguments;
-    letra = args[0];
-    codigo = args[1];
-    idSala = args[2];
-    _calculos();
-    // numCartones = 12;
-
     return Stack(
       children: [
         Container(
