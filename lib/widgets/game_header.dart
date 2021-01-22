@@ -6,11 +6,15 @@ class GameHeader extends StatelessWidget {
   final List<int> balotas;
   final Function canastaOnClick;
   final String letra;
+  final String idSala;
+  final int maxBalotas;
 
   GameHeader({
     @required this.balotas,
     @required this.canastaOnClick,
     @required this.letra,
+    @required this.idSala,
+    @required this.maxBalotas,
   });
 
   @override
@@ -22,36 +26,67 @@ class GameHeader extends StatelessWidget {
         children: [
           // parte de la canasta
           Flexible(
-            child:
-                BalotasContainer(balotas: this.balotas, action: canastaOnClick),
+            child: BalotasContainer(
+              balotas: this.balotas,
+              action: canastaOnClick,
+              maxBalotas: maxBalotas,
+            ),
           ),
           // parte del tablero negro y patron
-          _tableroNumeros(),
+          _gameInfo(),
         ],
       ),
     );
   }
 
-  Widget _tableroNumeros() {
+  Widget _gameInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        TableroNumeros(balotas: this.balotas),
-        SizedBox(height: 10.0),
-        Row(
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "PATRON",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.yellow,
-              ),
-            ),
-            SizedBox(width: 10.0),
-            Image.asset(this.letra, fit: BoxFit.cover, width: 75.0),
+            _descripcionSala(),
+            Text(this.idSala),
+            //TODO: nombre del jugador
           ],
         ),
+        TableroNumeros(balotas: this.balotas),
+        SizedBox(height: 10.0),
+        _patron(),
       ],
+    );
+  }
+
+  Widget _patron() {
+    return Row(
+      children: [
+        Text(
+          "PATRON",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.yellow,
+          ),
+        ),
+        SizedBox(width: 10.0),
+        Image.asset(this.letra, fit: BoxFit.cover, width: 75.0),
+      ],
+    );
+  }
+
+  Widget _descripcionSala() {
+    return Container(
+      margin: EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+      alignment: Alignment.centerRight,
+      child: Text(
+        "UNICO EN SALA",
+        style: TextStyle(
+          fontSize: 12.0,
+          fontFamily: "Josefine",
+          color: Colors.yellow,
+        ),
+      ),
     );
   }
 }

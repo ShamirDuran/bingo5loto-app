@@ -10,6 +10,7 @@ class _PreGamePageState extends State<PreGamePage> {
   int codigo;
   String letra;
   Size size;
+  String idSala;
 
   @override
   void initState() {
@@ -19,7 +20,9 @@ class _PreGamePageState extends State<PreGamePage> {
 
   @override
   Widget build(BuildContext context) {
-    codigo = ModalRoute.of(context).settings.arguments;
+    final List<Object> args = ModalRoute.of(context).settings.arguments;
+    codigo = args[0];
+    idSala = args[1];
     size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -64,6 +67,13 @@ class _PreGamePageState extends State<PreGamePage> {
           Image.asset("assets/images/full.png",
               fit: BoxFit.cover, width: 100.0),
           Expanded(child: Text("")),
+          Text('Tu id de sala es'),
+          SizedBox(height: 5.0),
+          Text(
+            this.idSala,
+            style: TextStyle(fontSize: 17.0, fontStyle: FontStyle.italic),
+          ),
+          Expanded(child: Text("")),
           _continueButton(),
         ],
       ),
@@ -88,7 +98,7 @@ class _PreGamePageState extends State<PreGamePage> {
         ),
         onPressed: () => Navigator.pushNamedAndRemoveUntil(
             context, "game", (route) => false,
-            arguments: [letra, codigo]),
+            arguments: [letra, codigo, idSala]),
       ),
     );
   }

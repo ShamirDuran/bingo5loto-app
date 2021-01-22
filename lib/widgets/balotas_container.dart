@@ -12,10 +12,12 @@ class BalotasContainer extends StatelessWidget {
   final Function action;
   final bingo = Bingo();
   final radius = 25.0;
+  final int maxBalotas;
 
   BalotasContainer({
     @required this.balotas,
     @required this.action,
+    @required this.maxBalotas,
   });
 
   @override
@@ -40,14 +42,14 @@ class BalotasContainer extends StatelessWidget {
             onSelected: (value) {},
             backgroundColor: Colors.indigo,
             label: Text(
-              '${balotas.length}/30',
+              '${balotas.length}/${this.maxBalotas}',
               style: TextStyle(
                 color: Colors.white,
               ),
             ),
           ),
           _imagenCanasta(),
-          SizedBox(height: 7.0),
+          SizedBox(height: 15.0),
           if (balotas.length > 0)
             _balota()
           else
@@ -77,11 +79,11 @@ class BalotasContainer extends StatelessWidget {
     Color color = Colors.indigo;
     final num = balotas.last;
 
-    // if (num >= 1 && num <= 15) color = colorCol1;
-    // if (num >= 16 && num <= 30) color = colorCol2;
-    // if (num >= 31 && num <= 45) color = colorCol3;
-    // if (num >= 46 && num <= 60) color = colorCol4;
-    // if (num >= 61 && num <= 75) color = colorCol5;
+    if (num >= 1 && num <= 15) color = colorCol1;
+    if (num >= 16 && num <= 30) color = colorCol2;
+    if (num >= 31 && num <= 45) color = colorCol3;
+    if (num >= 46 && num <= 60) color = colorCol4;
+    if (num >= 61 && num <= 75) color = colorCol5;
 
     return CircleAvatar(
       radius: this.radius,

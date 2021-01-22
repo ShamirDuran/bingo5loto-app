@@ -1,13 +1,13 @@
 import 'dart:ui';
 
-import 'package:bingo_app/utils/bingo.dart';
 import 'package:bingo_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class Carton extends StatefulWidget {
   final List<int> balotas;
-  Carton({@required this.balotas});
+  final List<List<int>> carton;
+  Carton({@required this.balotas, @required this.carton});
 
   @override
   _CartonState createState() => _CartonState();
@@ -16,14 +16,10 @@ class Carton extends StatefulWidget {
 class _CartonState extends State<Carton> {
   var uuid = Uuid();
   String id;
-  Bingo bingo;
-  List<List<int>> carton;
 
   @override
   void initState() {
     super.initState();
-    bingo = Bingo();
-    carton = bingo.generarCarton();
     id = uuid.v4().toString().substring(0, 13);
   }
 
@@ -60,39 +56,39 @@ class _CartonState extends State<Carton> {
                 _letraColumna("O"),
               ]),
               TableRow(children: [
-                _card(carton[0][0]),
-                _card(carton[1][0]),
-                _card(carton[2][0]),
-                _card(carton[3][0]),
-                _card(carton[4][0]),
+                _card(widget.carton[0][0]),
+                _card(widget.carton[1][0]),
+                _card(widget.carton[2][0]),
+                _card(widget.carton[3][0]),
+                _card(widget.carton[4][0]),
               ]),
               TableRow(children: [
-                _card(carton[0][1]),
-                _card(carton[1][1]),
-                _card(carton[2][1]),
-                _card(carton[3][1]),
-                _card(carton[4][1]),
+                _card(widget.carton[0][1]),
+                _card(widget.carton[1][1]),
+                _card(widget.carton[2][1]),
+                _card(widget.carton[3][1]),
+                _card(widget.carton[4][1]),
               ]),
               TableRow(children: [
-                _card(carton[0][2]),
-                _card(carton[1][2]),
+                _card(widget.carton[0][2]),
+                _card(widget.carton[1][2]),
                 Text(""),
-                _card(carton[3][2]),
-                _card(carton[4][2]),
+                _card(widget.carton[3][2]),
+                _card(widget.carton[4][2]),
               ]),
               TableRow(children: [
-                _card(carton[0][3]),
-                _card(carton[1][3]),
-                _card(carton[2][3]),
-                _card(carton[3][3]),
-                _card(carton[4][3]),
+                _card(widget.carton[0][3]),
+                _card(widget.carton[1][3]),
+                _card(widget.carton[2][3]),
+                _card(widget.carton[3][3]),
+                _card(widget.carton[4][3]),
               ]),
               TableRow(children: [
-                _card(carton[0][4]),
-                _card(carton[1][4]),
-                _card(carton[2][4]),
-                _card(carton[3][4]),
-                _card(carton[4][4]),
+                _card(widget.carton[0][4]),
+                _card(widget.carton[1][4]),
+                _card(widget.carton[2][4]),
+                _card(widget.carton[3][4]),
+                _card(widget.carton[4][4]),
               ]),
             ],
           ),

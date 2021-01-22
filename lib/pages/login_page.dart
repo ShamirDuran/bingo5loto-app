@@ -1,5 +1,6 @@
 import 'package:bingo_app/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,6 +13,9 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   bool _checkTelefono, _checkPassword;
   int minPhone, minPwd;
+  var uuid = Uuid();
+  Size size;
+  String idSala;
 
   @override
   void initState() {
@@ -24,6 +28,8 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.addListener(_validarPassword);
     minPhone = 10;
     minPwd = 8;
+    idSala = uuid.v4().toString().substring(0, 13);
+
     loadSVG();
   }
 
@@ -54,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    size = MediaQuery.of(context).size;
 
     return Scaffold(
       key: scaffoldkey,
@@ -68,6 +74,15 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () => Navigator.pushNamedAndRemoveUntil(
               context, "home", (route) => false),
         ),
+        actions: [
+          Center(
+              child: Padding(
+            padding: const EdgeInsets.only(
+              right: 20.0,
+            ),
+            child: Text(idSala),
+          )),
+        ],
       ),
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
@@ -177,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
             "Verifica que hayas tomado la foto de los datos, de otra manera, no podras reclamar los premios",
             () => Navigator.pushNamedAndRemoveUntil(
                 context, "pre-game", (route) => false,
-                arguments: codigo));
+                arguments: [codigo, idSala]));
       } else {
         showSnackBar("Código de Compra invalido", scaffoldkey);
       }
