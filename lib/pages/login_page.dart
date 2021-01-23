@@ -10,9 +10,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _telefonoController;
   TextEditingController _passwordController;
+  TextEditingController _nombreController;
+  TextEditingController _cedulaController;
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-  bool _checkTelefono, _checkPassword;
-  int minPhone, minPwd;
+  bool _checkTelefono = false,
+      _checkPassword = false,
+      _checkNombre = false,
+      _checkCedula = false;
+  int minPhone = 10, minPwd = 8, minNombre = 7, minCedula = 10;
   var uuid = Uuid();
   Size size;
   String idSala;
@@ -22,12 +27,13 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _telefonoController = TextEditingController();
     _passwordController = TextEditingController();
-    _checkPassword = false;
-    _checkTelefono = false;
+    _nombreController = TextEditingController();
+    _cedulaController = TextEditingController();
     _telefonoController.addListener(_validarTelefono);
     _passwordController.addListener(_validarPassword);
-    minPhone = 10;
-    minPwd = 8;
+    _nombreController.addListener(_validarNombre);
+    _cedulaController.addListener(_validarCedula);
+
     idSala = uuid.v4().toString().substring(0, 13);
 
     loadSVG();
@@ -40,8 +46,26 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  _validarNombre() {
+    if (_nombreController.text.length >= this.minNombre) {
+      _checkNombre = true;
+    } else {
+      _checkNombre = false;
+    }
+    setState(() {});
+  }
+
+  _validarCedula() {
+    if (_cedulaController.text.length >= this.minCedula) {
+      _checkCedula = true;
+    } else {
+      _checkCedula = false;
+    }
+    setState(() {});
+  }
+
   _validarTelefono() {
-    if (_telefonoController.text.length > 9) {
+    if (_telefonoController.text.length >= this.minPhone) {
       _checkTelefono = true;
     } else {
       _checkTelefono = false;
@@ -50,11 +74,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _validarPassword() {
-    if (_passwordController.text.length > 7) {
+    if (_passwordController.text.length >= this.minPwd) {
       _checkPassword = true;
     } else {
       _checkPassword = false;
     }
+
     setState(() {});
   }
 
@@ -117,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         // Titulo
         Container(
-          margin: EdgeInsets.only(top: 60.0),
+          margin: EdgeInsets.only(top: 10.0),
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             "Ingresa los datos que te suministraron",
@@ -125,15 +150,25 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
 
+        // Nombre
+        SizedBox(height: 20.0),
+        _inputText(size, "Nombre", _nombreController, this.minNombre, false,
+            TextInputType.text, 25, TextInputAction.next),
+
+        // Cedula
+        SizedBox(height: 20.0),
+        _inputText(size, "Cédula", _cedulaController, this.minCedula, false,
+            TextInputType.number, 12, TextInputAction.next),
+
         // Telefono
-        SizedBox(height: 40.0),
+        SizedBox(height: 20.0),
         _inputText(size, "Télefono", _telefonoController, this.minPhone, false,
-            TextInputType.text),
+            TextInputType.text, 25, TextInputAction.next),
 
         // Contraseña
         SizedBox(height: 20.0),
         _inputText(size, "Código de Compra", _passwordController, this.minPwd,
-            false, TextInputType.text),
+            false, TextInputType.text, 14, TextInputAction.done),
 
         // Recordatorio
         SizedBox(height: 20.0),
@@ -192,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
             "Verifica que hayas tomado la foto de los datos, de otra manera, no podras reclamar los premios",
             () => Navigator.pushNamedAndRemoveUntil(
                 context, "pre-game", (route) => false,
-                arguments: [codigo, idSala]));
+                arguments: [codigo, idSala, _nombreController.text]));
       } else {
         showSnackBar("Código de Compra invalido", scaffoldkey);
       }
@@ -213,13 +248,25 @@ class _LoginPageState extends State<LoginPage> {
             fontWeight: FontWeight.w300,
           ),
         ),
-        onPressed: _checkPassword && _checkTelefono ? _navigation : null,
+        onPressed:
+            _checkPassword && _checkTelefono && _checkNombre && _checkCedula
+                ? _navigation
+                : null,
       ),
     );
   }
 
-  Widget _inputText(Size size, String label, TextEditingController controlador,
-      int min, bool obscureStatus, TextInputType type) {
+  // widget que dibuja los input del form
+  Widget _inputText(
+    Size size,
+    String label,
+    TextEditingController controlador,
+    int min,
+    bool obscureStatus,
+    TextInputType type,
+    int max,
+    TextInputAction inputAction,
+  ) {
     return Container(
       height: 75.0,
       width: size.width * 0.8,
@@ -228,6 +275,8 @@ class _LoginPageState extends State<LoginPage> {
         keyboardType: type,
         controller: controlador,
         obscureText: obscureStatus,
+        maxLength: max,
+        textInputAction: inputAction,
         style: TextStyle(fontWeight: FontWeight.w300),
         decoration: InputDecoration(
           helperText: 'Debe tener al menos $min caracteres',

@@ -5,7 +5,7 @@ import 'package:bingo_app/widgets/game_header.dart';
 import 'package:flutter/material.dart';
 
 class GamePatron extends StatefulWidget {
-  final String letra, idSala;
+  final String letra, idSala, nombre;
   final int numCartones;
   final List<List<List<int>>> cartones;
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -16,6 +16,7 @@ class GamePatron extends StatefulWidget {
     @required this.numCartones,
     @required this.cartones,
     @required this.scaffoldKey,
+    @required this.nombre,
   });
 
   @override
@@ -28,7 +29,7 @@ class _GamePatronState extends State<GamePatron>
   bool get wantKeepAlive => true;
 
   final List<int> balotas = List();
-  final int maxBalotas = 65;
+  final int maxBalotas = 35;
   final bingo = Bingo();
   bool _gano = false;
 
@@ -44,6 +45,7 @@ class _GamePatronState extends State<GamePatron>
       showSnackBar("No te quedan balotas por jugar", widget.scaffoldKey);
   }
 
+  // cada vez que se da un click en la canasta se valida si hay un carton ganador
   _validarVictoria() {
     if (validarCartones(widget.letra, widget.cartones, this.balotas)) {
       showInfoDialog(
@@ -67,6 +69,7 @@ class _GamePatronState extends State<GamePatron>
             idSala: this.widget.idSala,
             maxBalotas: this.maxBalotas,
             gano: this._gano,
+            nombre: widget.nombre,
           ),
           // Lista de cartones
           SizedBox(height: 10.0),
@@ -77,6 +80,7 @@ class _GamePatronState extends State<GamePatron>
     );
   }
 
+  // Widget que se encarga de dibujar los cartones
   Widget _cartones() {
     int divisor = 2;
     num helper = this.widget.numCartones / divisor;

@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 class GameHeader extends StatelessWidget {
   final List<int> balotas;
   final Function canastaOnClick;
-  final String letra;
-  final String idSala;
+  final String letra, idSala, nombre;
   final int maxBalotas;
   final bool gano;
 
@@ -17,6 +16,7 @@ class GameHeader extends StatelessWidget {
     @required this.idSala,
     @required this.maxBalotas,
     @required this.gano,
+    @required this.nombre,
   });
 
   @override
@@ -50,8 +50,10 @@ class GameHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _descripcionSala(),
+            // id unica de esta sala
             Text(this.idSala),
-            //TODO: nombre del jugador
+            // nombre del usuario
+            Text(this.nombre),
           ],
         ),
         TableroNumeros(balotas: this.balotas),
@@ -61,6 +63,7 @@ class GameHeader extends StatelessWidget {
     );
   }
 
+  // carga la imagen del patron
   Widget _patron() {
     return Row(
       children: [
@@ -77,6 +80,7 @@ class GameHeader extends StatelessWidget {
     );
   }
 
+  // mensaje que indica que es el unico jugando
   Widget _descripcionSala() {
     return Container(
       margin: EdgeInsets.only(top: 20.0),

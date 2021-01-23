@@ -3,8 +3,10 @@ import 'package:bingo_app/utils/utils.dart';
 import 'package:bingo_app/widgets/game_patron.dart';
 import 'package:bingo_app/widgets/game_pleno.dart';
 import 'package:bingo_app/widgets/title_appbar.dart';
+import 'package:bingo_app/widgets/whatsapp_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 
 class GamePage extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   Bingo bingo = Bingo();
   int codigo, numCartones, multiplicador;
-  String letra, idSala;
+  String letra, idSala, nombre;
   List<List<List<int>>> cartones = List();
   List<Widget> menu;
   List<Object> args;
@@ -28,6 +30,7 @@ class _GamePageState extends State<GamePage> {
       letra = args[0];
       codigo = args[1];
       idSala = args[2];
+      nombre = args[3];
       _calculos();
     });
     _initMenu();
@@ -42,17 +45,6 @@ class _GamePageState extends State<GamePage> {
           PopupMenuItem(
             enabled: true,
             child: GestureDetector(
-              child: Text("Cerrar aplicación"),
-              onTap: () => showDialogPer(
-                  context,
-                  "Cerrar aplicación",
-                  "Al cerrar la aplicación perdera por completo los cartones y no habra forma de recuperarlos.",
-                  () => SystemNavigator.pop()),
-            ),
-          ),
-          PopupMenuItem(
-            enabled: true,
-            child: GestureDetector(
               child: Text("Volver a inicio"),
               onTap: () => showDialogPer(
                 context,
@@ -61,6 +53,27 @@ class _GamePageState extends State<GamePage> {
                 () => Navigator.pushNamedAndRemoveUntil(
                     context, "home", (route) => false),
               ),
+            ),
+          ),
+          PopupMenuItem(
+            enabled: true,
+            child: GestureDetector(
+              child: Text("Reportar error"),
+              onTap: () => FlutterOpenWhatsapp.sendSingleMessage("573125320126",
+                      "Encontre un error en BINGO 5 LOTO, quiero reportarlo")
+                  .catchError(() => showSnackBar(
+                      "No se pudo abrir WhatsApp", this.scaffoldKey)),
+            ),
+          ),
+          PopupMenuItem(
+            enabled: true,
+            child: GestureDetector(
+              child: Text("Cerrar aplicación"),
+              onTap: () => showDialogPer(
+                  context,
+                  "Cerrar aplicación",
+                  "Al cerrar la aplicación perdera por completo los cartones y no habra forma de recuperarlos.",
+                  () => SystemNavigator.pop()),
             ),
           ),
         ],
@@ -128,12 +141,14 @@ class _GamePageState extends State<GamePage> {
                   numCartones: this.numCartones,
                   cartones: this.cartones,
                   scaffoldKey: this.scaffoldKey,
+                  nombre: this.nombre,
                 ),
                 GamePleno(
                   idSala: this.idSala,
                   cartones: this.cartones,
                   numCartones: this.numCartones,
                   scaffoldKey: this.scaffoldKey,
+                  nombre: this.nombre,
                 ),
               ],
             ),

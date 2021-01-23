@@ -8,9 +8,8 @@ class PreGamePage extends StatefulWidget {
 
 class _PreGamePageState extends State<PreGamePage> {
   int codigo;
-  String letra;
+  String letra, idSala, nombre;
   Size size;
-  String idSala;
 
   @override
   void initState() {
@@ -23,6 +22,7 @@ class _PreGamePageState extends State<PreGamePage> {
     final List<Object> args = ModalRoute.of(context).settings.arguments;
     codigo = args[0];
     idSala = args[1];
+    nombre = args[2];
     size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -89,7 +89,7 @@ class _PreGamePageState extends State<PreGamePage> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Text(
-          "Continuar",
+          "Ingresar a Sala",
           style: TextStyle(
             color: Colors.white,
             fontSize: 20.0,
@@ -98,7 +98,7 @@ class _PreGamePageState extends State<PreGamePage> {
         ),
         onPressed: () => Navigator.pushNamedAndRemoveUntil(
             context, "game", (route) => false,
-            arguments: [letra, codigo, idSala]),
+            arguments: [letra, codigo, idSala, nombre]),
       ),
     );
   }

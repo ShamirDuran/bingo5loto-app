@@ -55,7 +55,10 @@ Loto
                             () => Navigator.pushNamed(context, "como-jugar"),
                           ),
                           SizedBox(height: 25.0),
-                          _button("TERMINOS Y CONDICIONES", () {}),
+                          _button(
+                            "TERMINOS Y CONDICIONES",
+                            () => Navigator.pushNamed(context, "terminos"),
+                          ),
                           SizedBox(height: 25.0),
                         ],
                       ),

@@ -15,6 +15,8 @@ loadSVG() async {
 
 // Show simple snackbar
 void showSnackBar(String msg, GlobalKey<ScaffoldState> key) {
+  key.currentState.removeCurrentSnackBar();
+
   final snack = SnackBar(
     behavior: SnackBarBehavior.floating,
     content: Text(msg),

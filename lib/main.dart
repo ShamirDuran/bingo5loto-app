@@ -3,9 +3,20 @@ import 'package:bingo_app/pages/game_page.dart';
 import 'package:bingo_app/pages/home_page.dart';
 import 'package:bingo_app/pages/login_page.dart';
 import 'package:bingo_app/pages/pre_game_page.dart';
+import 'package:bingo_app/pages/terminos_condiciones_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Disable landscape mode
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -32,8 +43,8 @@ class MyApp extends StatelessWidget {
         "como-jugar": (_) => ComoJugarPage(),
         "login": (_) => LoginPage(),
         "pre-game": (_) => PreGamePage(),
-        // "game": (_) => GameTab(),
         "game": (_) => GamePage(),
+        "terminos": (_) => TerminosCondicionesPage(),
       },
     );
   }
