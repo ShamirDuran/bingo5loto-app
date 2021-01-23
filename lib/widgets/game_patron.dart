@@ -29,7 +29,7 @@ class _GamePatronState extends State<GamePatron>
   bool get wantKeepAlive => true;
 
   final List<int> balotas = List();
-  final int maxBalotas = 35;
+  final int maxBalotas = 40;
   final bingo = Bingo();
   bool _gano = false;
 
@@ -48,8 +48,8 @@ class _GamePatronState extends State<GamePatron>
   // cada vez que se da un click en la canasta se valida si hay un carton ganador
   _validarVictoria() {
     if (validarCartones(widget.letra, widget.cartones, this.balotas)) {
-      showInfoDialog(
-          context, "Ganaste", "BINGOOO GANA PREMIO-1. FELICITACIONES");
+      showInfoDialog(context, "Ganaste!!!",
+          "BINGOOO GANA PREMIO-1. FELICITACIONES...¡CAPTURA LA FOTO PARA RECLAMAR TU PREMIO!");
       this._gano = true;
     }
   }

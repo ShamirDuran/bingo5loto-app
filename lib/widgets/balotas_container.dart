@@ -36,10 +36,10 @@ class BalotasContainer extends StatelessWidget {
             overflow: TextOverflow.clip,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontFamily: "Josefine",
-              fontSize: 18.0,
-            ),
+                fontWeight: this.gano ? FontWeight.bold : FontWeight.normal,
+                fontFamily: "Josefine",
+                fontSize: 18.0,
+                color: this.gano ? Colors.yellow : Colors.white),
           ),
           SizedBox(height: 5.0),
           InputChip(

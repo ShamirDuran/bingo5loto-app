@@ -29,7 +29,7 @@ class _GamePlenoState extends State<GamePleno>
 
   final List<int> balotas = List();
   final String letra = "assets/images/full.png";
-  final int maxBalotas = 57;
+  final int maxBalotas = 58;
   final bingo = Bingo();
   bool _gano = false;
 
@@ -48,8 +48,8 @@ class _GamePlenoState extends State<GamePleno>
   // Cada vez que se toca la canasta se valida si hay un carton ganador
   _validarVictoria() {
     if (validarCartones("full", widget.cartones, this.balotas)) {
-      showInfoDialog(
-          context, "Ganaste", "BINGOOO GANA PREMIO-2. FELICITACIONES");
+      showInfoDialog(context, "Ganaste!!!",
+          "BINGOOO GANA PREMIO-2. FELICITACIONES...¡CAPTURA LA FOTO PARA RECLAMAR TU PREMIO!");
       this._gano = true;
     }
   }

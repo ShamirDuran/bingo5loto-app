@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         /* dark theme settings */
       ),
       themeMode: ThemeMode.dark,
-      title: 'Bingo App',
+      title: 'Bingo 5 Loto',
       debugShowCheckedModeBanner: false,
       initialRoute: "home",
       routes: {

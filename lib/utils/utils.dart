@@ -86,7 +86,7 @@ String letraAleatoria() {
       asset = "assets/images/+.png";
       break;
     case 3:
-      asset = "assets/images/Y.png";
+      asset = "assets/images/L.png";
       break;
   }
   return asset;
@@ -193,15 +193,17 @@ bool validarCartones(
       }
     }
 
-    if (letra.substring(letra.length - 5, letra.length - 4) == "Y") {
+    if (letra.substring(letra.length - 5, letra.length - 4) == "L") {
       for (var carton in cartones) {
         check = true;
-        if (!balotas.contains(carton[0][0])) check = false;
+        if (!balotas.contains(carton[1][0])) check = false;
         if (!balotas.contains(carton[1][1])) check = false;
-        if (!balotas.contains(carton[2][3])) check = false;
+        if (!balotas.contains(carton[1][2])) check = false;
+        if (!balotas.contains(carton[1][3])) check = false;
+        if (!balotas.contains(carton[1][4])) check = false;
         if (!balotas.contains(carton[2][4])) check = false;
-        if (!balotas.contains(carton[3][1])) check = false;
-        if (!balotas.contains(carton[4][0])) check = false;
+        if (!balotas.contains(carton[3][4])) check = false;
+        if (!balotas.contains(carton[4][4])) check = false;
 
         if (check) {
           print(carton);

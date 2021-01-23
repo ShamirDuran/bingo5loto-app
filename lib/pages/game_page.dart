@@ -3,7 +3,6 @@ import 'package:bingo_app/utils/utils.dart';
 import 'package:bingo_app/widgets/game_patron.dart';
 import 'package:bingo_app/widgets/game_pleno.dart';
 import 'package:bingo_app/widgets/title_appbar.dart';
-import 'package:bingo_app/widgets/whatsapp_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
@@ -12,6 +11,8 @@ class GamePage extends StatefulWidget {
   @override
   _GamePageState createState() => _GamePageState();
 }
+
+// TODO: Cambiar padding solo en game
 
 class _GamePageState extends State<GamePage> {
   Bingo bingo = Bingo();
@@ -59,7 +60,7 @@ class _GamePageState extends State<GamePage> {
             enabled: true,
             child: GestureDetector(
               child: Text("Reportar error"),
-              onTap: () => FlutterOpenWhatsapp.sendSingleMessage("573125320126",
+              onTap: () => FlutterOpenWhatsapp.sendSingleMessage("573213863238",
                       "Encontre un error en BINGO 5 LOTO, quiero reportarlo")
                   .catchError(() => showSnackBar(
                       "No se pudo abrir WhatsApp", this.scaffoldKey)),
@@ -174,7 +175,7 @@ class _GamePageState extends State<GamePage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0),
-            child: Text("PATRON PLENO"),
+            child: Text("CARTON PLENO"),
           ),
         ],
       ),

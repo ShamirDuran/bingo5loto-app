@@ -61,9 +61,9 @@ class _PreGamePageState extends State<PreGamePage> {
         children: [
           Expanded(child: Text("")),
           _titulo(),
-          SizedBox(height: 30.0),
+          SizedBox(height: 25.0),
           Image.asset(this.letra, fit: BoxFit.cover, width: 100.0),
-          SizedBox(height: 40.0),
+          SizedBox(height: 30.0),
           Image.asset("assets/images/full.png",
               fit: BoxFit.cover, width: 100.0),
           Expanded(child: Text("")),
@@ -107,7 +107,7 @@ class _PreGamePageState extends State<PreGamePage> {
     return Container(
       child: Text(
         "Los patrones que jugaras son:",
-        style: TextStyle(fontSize: 30.0),
+        style: TextStyle(fontSize: 28.0),
       ),
     );
   }

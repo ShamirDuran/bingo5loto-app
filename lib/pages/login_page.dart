@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
       _checkPassword = false,
       _checkNombre = false,
       _checkCedula = false;
-  int minPhone = 10, minPwd = 8, minNombre = 7, minCedula = 10;
+  int minPhone = 10, minPwd = 8, minNombre = 7, minCedula = 7;
   var uuid = Uuid();
   Size size;
   String idSala;
@@ -158,17 +158,17 @@ class _LoginPageState extends State<LoginPage> {
         // Cedula
         SizedBox(height: 20.0),
         _inputText(size, "Cédula", _cedulaController, this.minCedula, false,
-            TextInputType.number, 12, TextInputAction.next),
+            TextInputType.number, 10, TextInputAction.next),
 
         // Telefono
         SizedBox(height: 20.0),
-        _inputText(size, "Télefono", _telefonoController, this.minPhone, false,
+        _inputText(size, "Celular", _telefonoController, this.minPhone, false,
             TextInputType.text, 25, TextInputAction.next),
 
         // Contraseña
         SizedBox(height: 20.0),
-        _inputText(size, "Código de Compra", _passwordController, this.minPwd,
-            false, TextInputType.text, 14, TextInputAction.done),
+        _inputText(size, "Contraseña", _passwordController, this.minPwd, false,
+            TextInputType.text, 14, TextInputAction.done),
 
         // Recordatorio
         SizedBox(height: 20.0),
@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           width: size.width * 0.8,
           child: Text(
-            "Recuerda tomar una foto de los datos, sera necesario para reclamar los premios",
+            "Recuerda tomar la foto de estos datos, de otra manera, no podras reclamar los premios.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -199,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, "como-jugar"),
       child: Text(
-        "¿Cómo consigo un código de compra?",
+        "¿Cómo consigo una contraseña para jugar?",
         style: TextStyle(
           color: Colors.blue,
           fontWeight: FontWeight.bold,
@@ -217,19 +217,19 @@ class _LoginPageState extends State<LoginPage> {
         codigo = int.parse(s);
         if (codigo == 0 || codigo > 9) codigo = 0;
       } catch (e) {
-        showSnackBar("Código de Compra invalido", scaffoldkey);
+        showSnackBar("Contraseña invalida", scaffoldkey);
       }
 
       if (codigo > 0) {
         showDialogPer(
             context,
             "Recordatorio",
-            "Verifica que hayas tomado la foto de los datos, de otra manera, no podras reclamar los premios",
+            "Verifica que hayas tomado la foto de estos datos, de otra manera, no podras reclamar los premios",
             () => Navigator.pushNamedAndRemoveUntil(
                 context, "pre-game", (route) => false,
                 arguments: [codigo, idSala, _nombreController.text]));
       } else {
-        showSnackBar("Código de Compra invalido", scaffoldkey);
+        showSnackBar("Contraseña invalida", scaffoldkey);
       }
     }
 

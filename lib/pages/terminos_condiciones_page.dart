@@ -34,13 +34,13 @@ class TerminosCondicionesPage extends StatelessWidget {
           textItem(
               "4.	El jugador debe enviar foto de la consignación realizada, agregando el número del documento de identidad, para poder asignarle una contraseña para ingresar a la Sala, una sola vez."),
           textItem(
-              "5.	El jugador podrá participar en dos premios: el premio-1 un Patrón de 8 casillas (T X Y +) y el Premio-2 un cartón pleno de 24 casillas."),
+              "5.	El jugador podrá participar en dos premios: el premio-1 un Patrón de 8 casillas (T X Y L) y el Premio-2 un cartón pleno de 24 casillas."),
           textItem(
-              "6.	El Premio-1 se obtendrá cuando se complete un Patrón con máximo 32 balotas jugadas."),
+              "6.	El Premio-1 se obtendrá cuando se complete un Patrón con máximo 40 balotas jugadas."),
           textItem(
-              "7.	El Premio-2 se obtendrá cuando se complete un cartón con máximo 55 balotas jugadas."),
+              "7.	El Premio-2 se obtendrá cuando se complete un cartón con máximo 58 balotas jugadas."),
           textItem(
-              "8.	Los premios se entregarán una vez verificados los datos correctos del jugador y cartón ganador."),
+              "8.	Los premios se entregarán una vez verificados los datos correctos del jugador y cartón ganador. El jugador debe enviar la foto del formulario de ingreso y la foto del cartón ganador."),
           textItem(
               "9.	El juego en modalidad progresivo tendrá una sola tripleta, la cual puede ganar el doble, el triple, el cuádruple o el quíntuple de veces el Premio-1 para el bingo Patrón."),
           textItem(
