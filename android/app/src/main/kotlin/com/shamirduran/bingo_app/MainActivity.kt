@@ -1,4 +1,4 @@
-package com.shamirduran.bingo_app
+package com.mundobingo5loto.bingo_app
 
 import io.flutter.embedding.android.FlutterActivity
 

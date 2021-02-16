@@ -21,7 +21,7 @@ class TerminosCondicionesPage extends StatelessWidget {
       child: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          Text("TERMINOS Y DONDICIONES",
+          Text("TERMINOS Y CONDICIONES",
               style: Theme.of(context).textTheme.headline6),
           SizedBox(height: 15.0),
           textItem(
