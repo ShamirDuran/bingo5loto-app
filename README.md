@@ -32,4 +32,4 @@ y el pleno.
 
 * Juego
 
-![patron](https://user-images.githubusercontent.com/40668021/108092701-f7aaf880-704a-11eb-9ef4-43ba1d2483d4.jpeg)
+![tableros](https://user-images.githubusercontent.com/40668021/108093214-79028b00-704b-11eb-9243-352d02ff4d5e.jpeg)
