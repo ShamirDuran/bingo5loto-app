@@ -1,17 +1,12 @@
+# Bingo 5 Loto
+
+Aplicación móvil desarrollada en Flutter que permite jugar al bingo.
+
 Letras disponibles:
 
 - T
 - -
 - X
-- Y
+- L
 
--> Tablero de letras: 18 balotas
--> Tablero de lleno: 40 balotas
-
-Pedir en el login
-
-- Telefono
-- Clave
-
-** Iluminar los numeros de forma automatica **
-** Mostrar el número de balotas que faltan **
+y el pleno.
