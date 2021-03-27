@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
+    size = MediaQuery.maybeOf(context).size;
 
     return Stack(
       children: [
@@ -41,14 +41,10 @@ Loto
                             ''',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 55.0,
-                                color: Colors.white,
-                                fontFamily: "Monoton",
-                                height: 1.2),
+                                fontSize: 55.0, color: Colors.white, fontFamily: "Monoton", height: 1.2),
                           ),
                           Expanded(child: Text("")),
-                          _button("JUGAR",
-                              () => Navigator.pushNamed(context, "login")),
+                          _button("JUGAR", () => Navigator.pushNamed(context, "login")),
                           SizedBox(height: 25.0),
                           _button(
                             "COMO JUGAR",

@@ -22,12 +22,11 @@ class GamePleno extends StatefulWidget {
   _GamePlenoState createState() => _GamePlenoState();
 }
 
-class _GamePlenoState extends State<GamePleno>
-    with AutomaticKeepAliveClientMixin<GamePleno> {
+class _GamePlenoState extends State<GamePleno> with AutomaticKeepAliveClientMixin<GamePleno> {
   @override
   bool get wantKeepAlive => true;
 
-  final List<int> balotas = List();
+  final List<int> balotas = [];
   final String letra = "assets/images/full.png";
   final int maxBalotas = 58;
   final bingo = Bingo();
@@ -41,8 +40,7 @@ class _GamePlenoState extends State<GamePleno>
       _validarVictoria();
       setState(() {});
     }
-    if (this.balotas.length == maxBalotas)
-      showSnackBar("No te quedan balotas por jugar", widget.scaffoldKey);
+    if (this.balotas.length == maxBalotas) showSnackBar("No te quedan balotas por jugar", widget.scaffoldKey);
   }
 
   // Cada vez que se toca la canasta se valida si hay un carton ganador
@@ -92,15 +90,10 @@ class _GamePlenoState extends State<GamePleno>
       posIndex = posIndex + 2;
 
       return TableRow(children: [
-        Carton(
-            balotas: this.balotas,
-            carton: this.widget.cartones[temp],
-            idSala: this.widget.idSala),
+        Carton(balotas: this.balotas, carton: this.widget.cartones[temp], idSala: this.widget.idSala),
         this.widget.cartones.length > temp + 1
             ? Carton(
-                idSala: this.widget.idSala,
-                balotas: this.balotas,
-                carton: this.widget.cartones[temp + 1])
+                idSala: this.widget.idSala, balotas: this.balotas, carton: this.widget.cartones[temp + 1])
             : Text(""),
       ]);
     }

@@ -6,15 +6,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 //Preload svg image in cache
 loadSVG() async {
   Future.wait([
-    precachePicture(
-        ExactAssetPicture(
-            SvgPicture.svgStringDecoder, "assets/images/canasta.svg"),
-        null),
+    precachePicture(ExactAssetPicture(SvgPicture.svgStringDecoder, "assets/images/canasta.svg"), null),
   ]);
 }
 
 // Show simple snackbar
 void showSnackBar(String msg, GlobalKey<ScaffoldState> key) {
+  // ScaffoldMessenger.of(key.currentContext).removeCurrentSnackBar();
   key.currentState.removeCurrentSnackBar();
 
   final snack = SnackBar(
@@ -27,8 +25,7 @@ void showSnackBar(String msg, GlobalKey<ScaffoldState> key) {
 }
 
 // Log out account dialog
-void showDialogPer(
-    BuildContext context, String titulo, String texto, Function action) {
+void showDialogPer(BuildContext context, String titulo, String texto, Function action) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -94,8 +91,7 @@ String letraAleatoria() {
 
 final String nombreApp = "BINGO 5 LOTO";
 
-bool validarCartones(
-    String letra, List<List<List<int>>> cartones, List<int> balotas) {
+bool validarCartones(String letra, List<List<List<int>>> cartones, List<int> balotas) {
   bool check = true;
 
   if (letra == "full") {

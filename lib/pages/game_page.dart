@@ -18,7 +18,7 @@ class _GamePageState extends State<GamePage> {
   Bingo bingo = Bingo();
   int codigo, numCartones, multiplicador;
   String letra, idSala, nombre;
-  List<List<List<int>>> cartones = List();
+  List<List<List<int>>> cartones = [];
   List<Widget> menu;
   List<Object> args;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -51,8 +51,7 @@ class _GamePageState extends State<GamePage> {
                 context,
                 "Volver a inicio",
                 "Al volver a inicio perdera por completo los cartones y no habra forma de recuperarlos.",
-                () => Navigator.pushNamedAndRemoveUntil(
-                    context, "home", (route) => false),
+                () => Navigator.pushNamedAndRemoveUntil(context, "home", (route) => false),
               ),
             ),
           ),
@@ -60,10 +59,9 @@ class _GamePageState extends State<GamePage> {
             enabled: true,
             child: GestureDetector(
               child: Text("Reportar error"),
-              onTap: () => FlutterOpenWhatsapp.sendSingleMessage("573213863238",
-                      "Encontre un error en BINGO 5 LOTO, quiero reportarlo")
-                  .catchError(() => showSnackBar(
-                      "No se pudo abrir WhatsApp", this.scaffoldKey)),
+              onTap: () => FlutterOpenWhatsapp.sendSingleMessage(
+                      "573213863238", "Encontre un error en BINGO 5 LOTO, quiero reportarlo")
+                  .catchError(() => showSnackBar("No se pudo abrir WhatsApp", this.scaffoldKey)),
             ),
           ),
           PopupMenuItem(
@@ -170,8 +168,7 @@ class _GamePageState extends State<GamePage> {
         tabs: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0),
-            child: Text(
-                'PATRON ${this.letra.substring(letra.length - 5, letra.length - 4).toUpperCase()}'),
+            child: Text('PATRON ${this.letra.substring(letra.length - 5, letra.length - 4).toUpperCase()}'),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0),
@@ -186,8 +183,7 @@ class _GamePageState extends State<GamePage> {
                   radius: 17.0,
                   child: Text(
                     'x$multiplicador',
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                   backgroundColor: Colors.yellow,
                 ),

@@ -13,10 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _nombreController;
   TextEditingController _cedulaController;
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-  bool _checkTelefono = false,
-      _checkPassword = false,
-      _checkNombre = false,
-      _checkCedula = false;
+  bool _checkTelefono = false, _checkPassword = false, _checkNombre = false, _checkCedula = false;
   int minPhone = 10, minPwd = 8, minNombre = 7, minCedula = 7;
   var uuid = Uuid();
   Size size;
@@ -85,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
+    size = MediaQuery.maybeOf(context).size;
 
     return Scaffold(
       key: scaffoldkey,
@@ -96,8 +93,7 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(
             Icons.arrow_back,
           ),
-          onPressed: () => Navigator.pushNamedAndRemoveUntil(
-              context, "home", (route) => false),
+          onPressed: () => Navigator.pushNamedAndRemoveUntil(context, "home", (route) => false),
         ),
         actions: [
           Center(
@@ -152,23 +148,23 @@ class _LoginPageState extends State<LoginPage> {
 
         // Nombre
         SizedBox(height: 20.0),
-        _inputText(size, "Nombre", _nombreController, this.minNombre, false,
-            TextInputType.text, 25, TextInputAction.next),
+        _inputText(size, "Nombre", _nombreController, this.minNombre, false, TextInputType.text, 25,
+            TextInputAction.next),
 
         // Cedula
         SizedBox(height: 20.0),
-        _inputText(size, "Cédula", _cedulaController, this.minCedula, false,
-            TextInputType.number, 10, TextInputAction.next),
+        _inputText(size, "Cédula", _cedulaController, this.minCedula, false, TextInputType.number, 10,
+            TextInputAction.next),
 
         // Telefono
         SizedBox(height: 20.0),
-        _inputText(size, "Celular", _telefonoController, this.minPhone, false,
-            TextInputType.text, 25, TextInputAction.next),
+        _inputText(size, "Celular", _telefonoController, this.minPhone, false, TextInputType.text, 25,
+            TextInputAction.next),
 
         // Contraseña
         SizedBox(height: 20.0),
-        _inputText(size, "Contraseña", _passwordController, this.minPwd, false,
-            TextInputType.text, 14, TextInputAction.done),
+        _inputText(size, "Contraseña", _passwordController, this.minPwd, false, TextInputType.text, 14,
+            TextInputAction.done),
 
         // Recordatorio
         SizedBox(height: 20.0),
@@ -225,8 +221,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
             "Recordatorio",
             "Verifica que hayas tomado la foto de estos datos, de otra manera, no podras reclamar los premios",
-            () => Navigator.pushNamedAndRemoveUntil(
-                context, "pre-game", (route) => false,
+            () => Navigator.pushNamedAndRemoveUntil(context, "pre-game", (route) => false,
                 arguments: [codigo, idSala, _nombreController.text]));
       } else {
         showSnackBar("Contraseña invalida", scaffoldkey);
@@ -248,10 +243,7 @@ class _LoginPageState extends State<LoginPage> {
             fontWeight: FontWeight.w300,
           ),
         ),
-        onPressed:
-            _checkPassword && _checkTelefono && _checkNombre && _checkCedula
-                ? _navigation
-                : null,
+        onPressed: _checkPassword && _checkTelefono && _checkNombre && _checkCedula ? _navigation : null,
       ),
     );
   }

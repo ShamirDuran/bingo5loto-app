@@ -3,8 +3,8 @@ import 'dart:math';
 class Bingo {
   List<int> _generarLinea(int x) {
     int a = x;
-    List<int> fila = new List<int>();
-    List<int> numerosAleatorios1 = new List<int>();
+    List<int> fila = [];
+    List<int> numerosAleatorios1 = [];
     for (int i = 0; i <= 14; i++) {
       numerosAleatorios1.add(a);
       a = (a + 1);
@@ -24,12 +24,12 @@ class Bingo {
 
   /// Genera el tablero 5x5 de numeros aleatorios
   List<List<int>> generarCarton() {
-    List<int> fila1 = new List<int>();
-    List<int> fila2 = new List<int>();
-    List<int> fila3 = new List<int>();
-    List<int> fila4 = new List<int>();
-    List<int> fila5 = new List<int>();
-    List<List<int>> carton = new List();
+    List<int> fila1 = [];
+    List<int> fila2 = [];
+    List<int> fila3 = [];
+    List<int> fila4 = [];
+    List<int> fila5 = [];
+    List<List<int>> carton = [];
     fila1 = _generarLinea(1);
     carton.add(fila1);
     fila2 = _generarLinea(16);
@@ -46,7 +46,7 @@ class Bingo {
 
   /// Genera las filas del tablero de los numeros del 1 al 75
   List<int> generarFila(int x) {
-    List<int> fila = List();
+    List<int> fila = [];
     fila.add(x);
     fila.add(x + 15);
     fila.add(x + 30);

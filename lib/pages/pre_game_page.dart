@@ -23,7 +23,7 @@ class _PreGamePageState extends State<PreGamePage> {
     codigo = args[0];
     idSala = args[1];
     nombre = args[2];
-    size = MediaQuery.of(context).size;
+    size = MediaQuery.maybeOf(context).size;
 
     return Scaffold(
         appBar: _buildAppBar(),
@@ -64,8 +64,7 @@ class _PreGamePageState extends State<PreGamePage> {
           SizedBox(height: 25.0),
           Image.asset(this.letra, fit: BoxFit.cover, width: 100.0),
           SizedBox(height: 30.0),
-          Image.asset("assets/images/full.png",
-              fit: BoxFit.cover, width: 100.0),
+          Image.asset("assets/images/full.png", fit: BoxFit.cover, width: 100.0),
           Expanded(child: Text("")),
           Text('Tu id de sala es'),
           SizedBox(height: 5.0),
@@ -96,8 +95,7 @@ class _PreGamePageState extends State<PreGamePage> {
             fontWeight: FontWeight.w300,
           ),
         ),
-        onPressed: () => Navigator.pushNamedAndRemoveUntil(
-            context, "game", (route) => false,
+        onPressed: () => Navigator.pushNamedAndRemoveUntil(context, "game", (route) => false,
             arguments: [letra, codigo, idSala, nombre]),
       ),
     );
