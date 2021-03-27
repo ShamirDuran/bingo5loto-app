@@ -12,8 +12,7 @@ loadSVG() async {
 
 // Show simple snackbar
 void showSnackBar(String msg, GlobalKey<ScaffoldState> key) {
-  // ScaffoldMessenger.of(key.currentContext).removeCurrentSnackBar();
-  key.currentState.removeCurrentSnackBar();
+  ScaffoldMessenger.of(key.currentContext).removeCurrentSnackBar();
 
   final snack = SnackBar(
     behavior: SnackBarBehavior.floating,
@@ -21,7 +20,7 @@ void showSnackBar(String msg, GlobalKey<ScaffoldState> key) {
     duration: Duration(milliseconds: 3200),
   );
 
-  key.currentState.showSnackBar(snack);
+  ScaffoldMessenger.of(key.currentContext).showSnackBar(snack);
 }
 
 // Log out account dialog
@@ -33,11 +32,11 @@ void showDialogPer(BuildContext context, String titulo, String texto, Function a
       title: Text(titulo),
       content: Text(texto),
       actions: [
-        FlatButton(
+        TextButton(
           child: Text("Cancelar"),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        FlatButton(
+        TextButton(
           child: Text("Ok"),
           onPressed: () => action(),
         ),
@@ -55,11 +54,11 @@ void showInfoDialog(BuildContext context, String titulo, String texto) {
       title: Text(titulo),
       content: Text(texto),
       actions: [
-        FlatButton(
+        TextButton(
           child: Text("Cancelar"),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        FlatButton(
+        TextButton(
           child: Text("Ok"),
           onPressed: () => Navigator.of(context).pop(),
         ),

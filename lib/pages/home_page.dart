@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.maybeOf(context).size;
+    size = MediaQuery.maybeOf(context).size ?? MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
 
     return Stack(
       children: [
@@ -72,9 +72,11 @@ Loto
   Widget _button(String texto, Function action) {
     return Parallelogram(
       cutLength: 10.0,
-      child: FlatButton(
-        padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 25.0),
-        color: Colors.white,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 25.0),
+          backgroundColor: Colors.white,
+        ),
         child: Text(
           texto,
           style: TextStyle(

@@ -7,7 +7,8 @@ class DividerExpanded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.maybeOf(context).size;
+    final size =
+        MediaQuery.maybeOf(context).size ?? MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
     return Expanded(
       child: Container(
         width: size.width * 0.8,

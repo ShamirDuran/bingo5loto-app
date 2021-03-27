@@ -23,7 +23,7 @@ class _PreGamePageState extends State<PreGamePage> {
     codigo = args[0];
     idSala = args[1];
     nombre = args[2];
-    size = MediaQuery.maybeOf(context).size;
+    size = MediaQuery.maybeOf(context).size ?? MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
 
     return Scaffold(
         appBar: _buildAppBar(),
@@ -83,9 +83,9 @@ class _PreGamePageState extends State<PreGamePage> {
     return Container(
       width: size.width * 0.8,
       height: 50.0,
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
         child: Text(
           "Ingresar a Sala",

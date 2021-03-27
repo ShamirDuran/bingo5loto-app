@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.maybeOf(context).size;
+    size = MediaQuery.maybeOf(context).size ?? MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
 
     return Scaffold(
       key: scaffoldkey,
@@ -231,9 +231,9 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       width: size.width * 0.8,
       height: 50.0,
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
         child: Text(
           "Continuar",
