@@ -29,12 +29,14 @@ class ComoJugarPage extends StatelessWidget {
                 "Para poder jugar debes comprar tripletas (3 cartones) con las que podras jugar y obtener diferentes premios."),
             SizedBox(height: 20.0),
             bodyText(
-                "Puedes consultar los precios o realizar compras comunicandote al siguiente número de WhatsApp:"),
+                "Puedes consultar los premios comunicandote a los siguientes números de WhatsApp:"),
             SizedBox(height: 10.0),
             Column(
               children: [
-                SizedBox(height: 20.0),
-                WhatsappButton(id: _scaffoldKey),
+                SizedBox(height: 12.0),
+                WhatsappButton(id: _scaffoldKey, telefono: "3213863238"),
+                WhatsappButton(id: _scaffoldKey, telefono: "3134098315"),
+                SizedBox(height: 6.0),
                 Text("Click en el botón para ir a WhatsApp",
                     style: Theme.of(context).textTheme.caption),
               ],
