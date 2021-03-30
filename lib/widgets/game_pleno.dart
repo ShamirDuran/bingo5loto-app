@@ -22,15 +22,40 @@ class GamePleno extends StatefulWidget {
   _GamePlenoState createState() => _GamePlenoState();
 }
 
-class _GamePlenoState extends State<GamePleno> with AutomaticKeepAliveClientMixin<GamePleno> {
+class _GamePlenoState extends State<GamePleno>
+    with AutomaticKeepAliveClientMixin<GamePleno> {
   @override
   bool get wantKeepAlive => true;
 
   final List<int> balotas = [];
   final String letra = "assets/images/full.png";
-  final int maxBalotas = 58;
   final bingo = Bingo();
   bool _gano = false;
+  int maxBalotas;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// Asigna el numero maximo de balotas de acuerdo a las tripletas a jugar
+    switch (widget.numCartones) {
+      case 3:
+        this.maxBalotas = 63;
+        break;
+      case 6:
+        this.maxBalotas = 62;
+        break;
+      case 9:
+        this.maxBalotas = 60;
+        break;
+      case 12:
+        this.maxBalotas = 58;
+        break;
+      case 15:
+        this.maxBalotas = 57;
+        break;
+    }
+  }
 
   /// Evento de onClick en la canasta
   canastaOnClick() {
@@ -40,7 +65,8 @@ class _GamePlenoState extends State<GamePleno> with AutomaticKeepAliveClientMixi
       _validarVictoria();
       setState(() {});
     }
-    if (this.balotas.length == maxBalotas) showSnackBar("No te quedan balotas por jugar", widget.scaffoldKey);
+    if (this.balotas.length == maxBalotas)
+      showSnackBar("No te quedan balotas por jugar", widget.scaffoldKey);
   }
 
   // Cada vez que se toca la canasta se valida si hay un carton ganador
@@ -90,10 +116,15 @@ class _GamePlenoState extends State<GamePleno> with AutomaticKeepAliveClientMixi
       posIndex = posIndex + 2;
 
       return TableRow(children: [
-        Carton(balotas: this.balotas, carton: this.widget.cartones[temp], idSala: this.widget.idSala),
+        Carton(
+            balotas: this.balotas,
+            carton: this.widget.cartones[temp],
+            idSala: this.widget.idSala),
         this.widget.cartones.length > temp + 1
             ? Carton(
-                idSala: this.widget.idSala, balotas: this.balotas, carton: this.widget.cartones[temp + 1])
+                idSala: this.widget.idSala,
+                balotas: this.balotas,
+                carton: this.widget.cartones[temp + 1])
             : Text(""),
       ]);
     }

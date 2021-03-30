@@ -23,12 +23,13 @@ class GamePatron extends StatefulWidget {
   _GamePatronState createState() => _GamePatronState();
 }
 
-class _GamePatronState extends State<GamePatron> with AutomaticKeepAliveClientMixin<GamePatron> {
+class _GamePatronState extends State<GamePatron>
+    with AutomaticKeepAliveClientMixin<GamePatron> {
   @override
   bool get wantKeepAlive => true;
 
   final List<int> balotas = [];
-  final int maxBalotas = 40;
+  final int maxBalotas = 43;
   final bingo = Bingo();
   bool _gano = false;
 
@@ -40,7 +41,8 @@ class _GamePatronState extends State<GamePatron> with AutomaticKeepAliveClientMi
       _validarVictoria();
       setState(() {});
     }
-    if (this.balotas.length == maxBalotas) showSnackBar("No te quedan balotas por jugar", widget.scaffoldKey);
+    if (this.balotas.length == maxBalotas)
+      showSnackBar("No te quedan balotas por jugar", widget.scaffoldKey);
   }
 
   // cada vez que se da un click en la canasta se valida si hay un carton ganador
@@ -90,10 +92,15 @@ class _GamePatronState extends State<GamePatron> with AutomaticKeepAliveClientMi
       posIndex = posIndex + 2;
 
       return TableRow(children: [
-        Carton(balotas: this.balotas, carton: this.widget.cartones[temp], idSala: this.widget.idSala),
+        Carton(
+            balotas: this.balotas,
+            carton: this.widget.cartones[temp],
+            idSala: this.widget.idSala),
         widget.cartones.length > temp + 1
             ? Carton(
-                idSala: this.widget.idSala, balotas: this.balotas, carton: this.widget.cartones[temp + 1])
+                idSala: this.widget.idSala,
+                balotas: this.balotas,
+                carton: this.widget.cartones[temp + 1])
             : Text(""),
       ]);
     }

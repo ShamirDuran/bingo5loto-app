@@ -11,7 +11,7 @@ class BalotasContainer extends StatelessWidget {
   final List<int> balotas;
   final Function action;
   final bingo = Bingo();
-  final radius = 25.0;
+  final radius = 28.0;
   final int maxBalotas;
   final bool gano;
 
@@ -32,7 +32,7 @@ class BalotasContainer extends StatelessWidget {
           Text(
             this.gano
                 ? "Ganaste!. No olvides reclamar tu premio"
-                : "Toca la canasta para sacar una balota",
+                : "Toca la canasta y saca tu SUERTE",
             overflow: TextOverflow.clip,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -67,6 +67,7 @@ class BalotasContainer extends StatelessWidget {
     );
   }
 
+  /// Carga la imagen de la canasta
   Widget _imagenCanasta() {
     return GestureDetector(
       onTap: action,
@@ -90,6 +91,7 @@ class BalotasContainer extends StatelessWidget {
 
   Widget _balota() {
     Color color = Colors.indigo;
+    // num = ultima balota que saco el jugador
     final num = balotas.last;
 
     if (num >= 1 && num <= 15) color = colorCol1;
@@ -98,15 +100,24 @@ class BalotasContainer extends StatelessWidget {
     if (num >= 46 && num <= 60) color = colorCol4;
     if (num >= 61 && num <= 75) color = colorCol5;
 
+    // Texto que va a tener la balota sacada
+    String label = "";
+
+    if (num >= 1 && num <= 15) label = "B-$num";
+    if (num >= 16 && num <= 30) label = "I-$num";
+    if (num >= 31 && num <= 45) label = "N-$num";
+    if (num >= 46 && num <= 60) label = "G-$num";
+    if (num >= 61 && num <= 75) label = "O-$num";
+
     return CircleAvatar(
       radius: this.radius,
       backgroundColor: color,
       child: Text(
-        num.toString(),
+        label,
         style: TextStyle(
           color: Colors.white,
-          fontSize: 23.0,
-          fontWeight: FontWeight.bold,
+          fontSize: 21.0,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
