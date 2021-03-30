@@ -8,13 +8,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _telefonoController;
   TextEditingController _passwordController;
   TextEditingController _nombreController;
-  TextEditingController _cedulaController;
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-  bool _checkTelefono = false, _checkPassword = false, _checkNombre = false, _checkCedula = false;
-  int minPhone = 10, minPwd = 8, minNombre = 7, minCedula = 7;
+  bool _checkPassword = false, _checkNombre = false;
+  int minPwd = 8, minNombre = 7;
   var uuid = Uuid();
   Size size;
   String idSala;
@@ -22,14 +20,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _telefonoController = TextEditingController();
     _passwordController = TextEditingController();
-    _nombreController = TextEditingController();
-    _cedulaController = TextEditingController();
-    _telefonoController.addListener(_validarTelefono);
     _passwordController.addListener(_validarPassword);
+    _nombreController = TextEditingController();
     _nombreController.addListener(_validarNombre);
-    _cedulaController.addListener(_validarCedula);
 
     idSala = uuid.v4().toString().substring(0, 13);
 
@@ -38,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _telefonoController.dispose();
+    _nombreController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -48,24 +42,6 @@ class _LoginPageState extends State<LoginPage> {
       _checkNombre = true;
     } else {
       _checkNombre = false;
-    }
-    setState(() {});
-  }
-
-  _validarCedula() {
-    if (_cedulaController.text.length >= this.minCedula) {
-      _checkCedula = true;
-    } else {
-      _checkCedula = false;
-    }
-    setState(() {});
-  }
-
-  _validarTelefono() {
-    if (_telefonoController.text.length >= this.minPhone) {
-      _checkTelefono = true;
-    } else {
-      _checkTelefono = false;
     }
     setState(() {});
   }
@@ -82,7 +58,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.maybeOf(context).size ?? MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
+    size = MediaQuery.maybeOf(context).size ??
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
 
     return Scaffold(
       key: scaffoldkey,
@@ -93,7 +70,8 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(
             Icons.arrow_back,
           ),
-          onPressed: () => Navigator.pushNamedAndRemoveUntil(context, "home", (route) => false),
+          onPressed: () => Navigator.pushNamedAndRemoveUntil(
+              context, "home", (route) => false),
         ),
         actions: [
           Center(
@@ -146,25 +124,18 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
 
+        Expanded(
+          child: Container(),
+        ),
         // Nombre
         SizedBox(height: 20.0),
-        _inputText(size, "Nombre", _nombreController, this.minNombre, false, TextInputType.text, 25,
-            TextInputAction.next),
-
-        // Cedula
-        SizedBox(height: 20.0),
-        _inputText(size, "Cédula", _cedulaController, this.minCedula, false, TextInputType.number, 10,
-            TextInputAction.next),
-
-        // Telefono
-        SizedBox(height: 20.0),
-        _inputText(size, "Celular", _telefonoController, this.minPhone, false, TextInputType.text, 25,
-            TextInputAction.next),
+        _inputText(size, "Nombre", _nombreController, this.minNombre, false,
+            TextInputType.text, 25, TextInputAction.next),
 
         // Contraseña
         SizedBox(height: 20.0),
-        _inputText(size, "Contraseña", _passwordController, this.minPwd, false, TextInputType.text, 14,
-            TextInputAction.done),
+        _inputText(size, "Contraseña", _passwordController, this.minPwd, false,
+            TextInputType.text, 14, TextInputAction.done),
 
         // Recordatorio
         SizedBox(height: 20.0),
@@ -221,7 +192,8 @@ class _LoginPageState extends State<LoginPage> {
             context,
             "Recordatorio",
             "Verifica que hayas tomado la foto de estos datos, de otra manera, no podras reclamar los premios",
-            () => Navigator.pushNamedAndRemoveUntil(context, "pre-game", (route) => false,
+            () => Navigator.pushNamedAndRemoveUntil(
+                context, "pre-game", (route) => false,
                 arguments: [codigo, idSala, _nombreController.text]));
       } else {
         showSnackBar("Contraseña invalida", scaffoldkey);
@@ -233,7 +205,8 @@ class _LoginPageState extends State<LoginPage> {
       height: 50.0,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
         child: Text(
           "Continuar",
@@ -243,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
             fontWeight: FontWeight.w300,
           ),
         ),
-        onPressed: _checkPassword && _checkTelefono && _checkNombre && _checkCedula ? _navigation : null,
+        onPressed: _checkPassword && _checkNombre ? _navigation : null,
       ),
     );
   }
