@@ -6,8 +6,12 @@ class Carton extends StatefulWidget {
   final List<int> balotas;
   final List<List<int>> carton;
   final String idSala;
-  Carton(
-      {@required this.balotas, @required this.carton, @required this.idSala});
+
+  Carton({
+    @required this.balotas,
+    @required this.carton,
+    @required this.idSala,
+  });
 
   @override
   _CartonState createState() => _CartonState();

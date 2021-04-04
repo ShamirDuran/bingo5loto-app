@@ -17,7 +17,7 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   Bingo bingo = Bingo();
   int codigo, numCartones, multiplicador;
-  String letra, idSala, nombre;
+  String letra, idSala, nombre, password;
   List<List<List<int>>> cartones = [];
   List<Widget> menu;
   List<Object> args;
@@ -32,6 +32,7 @@ class _GamePageState extends State<GamePage> {
       codigo = args[1];
       idSala = args[2];
       nombre = args[3];
+      password = args[4];
       _calculos();
     });
     _initMenu();
@@ -51,7 +52,8 @@ class _GamePageState extends State<GamePage> {
                 context,
                 "Volver a inicio",
                 "Al volver a inicio perdera por completo los cartones y no habra forma de recuperarlos.",
-                () => Navigator.pushNamedAndRemoveUntil(context, "home", (route) => false),
+                () => Navigator.pushNamedAndRemoveUntil(
+                    context, "home", (route) => false),
               ),
             ),
           ),
@@ -59,9 +61,10 @@ class _GamePageState extends State<GamePage> {
             enabled: true,
             child: GestureDetector(
               child: Text("Reportar error"),
-              onTap: () => FlutterOpenWhatsapp.sendSingleMessage(
-                      "573213863238", "Encontre un error en BINGO 5 LOTO, quiero reportarlo")
-                  .catchError(() => showSnackBar("No se pudo abrir WhatsApp", this.scaffoldKey)),
+              onTap: () => FlutterOpenWhatsapp.sendSingleMessage("573213863238",
+                      "Encontre un error en BINGO 5 LOTO, quiero reportarlo")
+                  .catchError(() => showSnackBar(
+                      "No se pudo abrir WhatsApp", this.scaffoldKey)),
             ),
           ),
           PopupMenuItem(
@@ -135,20 +138,20 @@ class _GamePageState extends State<GamePage> {
             body: TabBarView(
               children: [
                 GamePatron(
-                  letra: this.letra,
-                  idSala: this.idSala,
-                  numCartones: this.numCartones,
-                  cartones: this.cartones,
-                  scaffoldKey: this.scaffoldKey,
-                  nombre: this.nombre,
-                ),
+                    letra: this.letra,
+                    idSala: this.idSala,
+                    numCartones: this.numCartones,
+                    cartones: this.cartones,
+                    scaffoldKey: this.scaffoldKey,
+                    nombre: this.nombre,
+                    password: this.password),
                 GamePleno(
-                  idSala: this.idSala,
-                  cartones: this.cartones,
-                  numCartones: this.numCartones,
-                  scaffoldKey: this.scaffoldKey,
-                  nombre: this.nombre,
-                ),
+                    idSala: this.idSala,
+                    cartones: this.cartones,
+                    numCartones: this.numCartones,
+                    scaffoldKey: this.scaffoldKey,
+                    nombre: this.nombre,
+                    password: this.password),
               ],
             ),
           ),
@@ -168,7 +171,8 @@ class _GamePageState extends State<GamePage> {
         tabs: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0),
-            child: Text('PATRON ${this.letra.substring(letra.length - 5, letra.length - 4).toUpperCase()}'),
+            child: Text(
+                'PATRON ${this.letra.substring(letra.length - 5, letra.length - 4).toUpperCase()}'),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0),
@@ -183,7 +187,8 @@ class _GamePageState extends State<GamePage> {
                   radius: 17.0,
                   child: Text(
                     'x$multiplicador',
-                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                   backgroundColor: Colors.yellow,
                 ),

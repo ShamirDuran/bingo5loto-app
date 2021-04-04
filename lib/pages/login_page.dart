@@ -193,8 +193,13 @@ class _LoginPageState extends State<LoginPage> {
             "Recordatorio",
             "Verifica que hayas tomado la foto de estos datos, de otra manera, no podras reclamar los premios",
             () => Navigator.pushNamedAndRemoveUntil(
-                context, "pre-game", (route) => false,
-                arguments: [codigo, idSala, _nombreController.text]));
+                    context, "pre-game", (route) => false,
+                    arguments: [
+                      codigo,
+                      idSala,
+                      _nombreController.text,
+                      _passwordController.text,
+                    ]));
       } else {
         showSnackBar("Contraseña invalida", scaffoldkey);
       }

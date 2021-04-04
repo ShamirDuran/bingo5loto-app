@@ -5,7 +5,7 @@ import 'package:bingo_app/widgets/game_header.dart';
 import 'package:flutter/material.dart';
 
 class GamePleno extends StatefulWidget {
-  final String idSala, nombre;
+  final String idSala, nombre, password;
   final int numCartones;
   final List<List<List<int>>> cartones;
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -16,6 +16,7 @@ class GamePleno extends StatefulWidget {
     @required this.cartones,
     @required this.scaffoldKey,
     @required this.nombre,
+    @required this.password,
   });
 
   @override
@@ -94,6 +95,7 @@ class _GamePlenoState extends State<GamePleno>
             maxBalotas: this.maxBalotas,
             gano: this._gano,
             nombre: widget.nombre,
+            password: widget.password,
           ),
           // Lista de cartones
           SizedBox(height: 10.0),

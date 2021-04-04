@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class GameHeader extends StatelessWidget {
   final List<int> balotas;
   final Function canastaOnClick;
-  final String letra, idSala, nombre;
+  final String letra, idSala, nombre, password;
   final int maxBalotas;
   final bool gano;
 
@@ -17,6 +17,7 @@ class GameHeader extends StatelessWidget {
     @required this.maxBalotas,
     @required this.gano,
     @required this.nombre,
+    @required this.password,
   });
 
   @override
@@ -54,6 +55,8 @@ class GameHeader extends StatelessWidget {
             Text(this.idSala),
             // nombre del usuario
             Text(this.nombre),
+            // password
+            Text(this.password),
           ],
         ),
         TableroNumeros(balotas: this.balotas),

@@ -42,7 +42,7 @@ class ComoJugarPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 30.0),
-            titleText(context, "¿Cómo obtengo un código de compra?"),
+            titleText(context, "¿Cómo obtengo una contraseña?"),
             SizedBox(height: 10.0),
             bodyText(
                 "Una vez que realices la compra de al menos una tripleta, se te suministrará un usuario (que será tu teléfono) y un código de compra para que puedas empezar a jugar.")
