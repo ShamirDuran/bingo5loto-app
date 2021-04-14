@@ -59,7 +59,9 @@ class TerminosCondicionesPage extends StatelessWidget {
           textItem(
               "13. Aplicamos politica de protección de datos a la información digitada por el jugador."),
           textItem(
-              "14. Le respondemos en un plazo de 24 a 72 horas sus inquietudes al correo electrónico bingo5loto2021@gmail.com")
+              "14. Le respondemos en un plazo de 24 a 72 horas sus inquietudes al correo electrónico bingo5loto2021@gmail.com"),
+          textItem(
+              "15. La empresa asume a su cargo y riesgo el de los beneficios obtenidos por el jugador que salga beneficiado con el bingo, independientemente de su beneficio obtenido."),
         ],
       ),
     );

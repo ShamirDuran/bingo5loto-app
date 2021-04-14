@@ -19,17 +19,17 @@ class ComoJugarPage extends StatelessWidget {
         elevation: 1,
       ),
       body: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: ListView(
           children: [
-            SizedBox(height: 10.0),
+            SizedBox(height: 20.0),
             titleText(context, '¿Comó jugar a Bingo 5 Loto?'),
             SizedBox(height: 10.0),
             bodyText(
-                "Para poder jugar debes comprar tripletas (3 cartones) con las que podras jugar y obtener diferentes premios."),
+                "Para poder jugar debes comunicarte a uno de los siguientes números de WhatsApp donde se te suministrara el código de acceso. "),
             SizedBox(height: 20.0),
             bodyText(
-                "Puedes consultar los premios comunicandote a los siguientes números de WhatsApp:"),
+                "También puedes solicitar el listado de recompensas al ganar."),
             SizedBox(height: 10.0),
             Column(
               children: [
@@ -42,10 +42,30 @@ class ComoJugarPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 30.0),
-            titleText(context, "¿Cómo obtengo una contraseña?"),
+            titleText(context, "¿Cómo obtengo un código de acceso?"),
             SizedBox(height: 10.0),
             bodyText(
-                "Una vez que realices la compra de al menos una tripleta, se te suministrará un usuario (que será tu teléfono) y un código de compra para que puedas empezar a jugar.")
+                "Una vez que realices la contribución de al menos una tripleta, se te suministrará un usuario (que será tu teléfono) y un código de compra para que puedas empezar a jugar."),
+            SizedBox(height: 30.0),
+            /**
+             * requisitos
+             */
+            titleText(context, "Requisitos para tener en cuenta"),
+            SizedBox(height: 10.0),
+            bodyText("1. El jugador debe residir en territorio colombiano."),
+            SizedBox(height: 10.0),
+            bodyText(
+                "2. Una vez confirmado el deposito se le suministra al usuario"),
+            SizedBox(height: 10.0),
+            bodyText(
+                "3. Deberá leer términos y condiciones de la App, para participar en el juego de Bingo unipersonal."),
+            SizedBox(height: 10.0),
+            bodyText(
+                "4. Para reclamar los recursos obtenidos deberás demostrar la identidad."),
+            SizedBox(height: 10.0),
+            bodyText(
+                "5.	Los datos personales quedan brindados por el operador, información que era confidencial, con un control riguroso y regulación."),
+            SizedBox(height: 30.0),
           ],
         ),
       ),
