@@ -7,7 +7,7 @@ Cada cartón se genera de forma aleatoria al igual que las balotas generadas.
 Letras disponibles:
 
 - T
-- más
+- +
 - X
 - L
 
